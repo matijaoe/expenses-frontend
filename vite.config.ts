@@ -14,6 +14,9 @@ export default defineConfig({
       '~/': `${path.resolve(__dirname, 'src')}/`,
     },
   },
+  optimizeDeps: {
+    exclude: ['vue-demi'],
+  },
   plugins: [
     Vue(),
 
