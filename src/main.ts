@@ -8,6 +8,9 @@ import ElementPlus from 'element-plus'
 import App from './App.vue'
 
 import '@unocss/reset/tailwind.css'
+// Element Plus
+import 'element-plus/dist/index.css'
+import './styles/element/index.scss'
 import './styles/main.scss'
 import 'uno.css'
 
