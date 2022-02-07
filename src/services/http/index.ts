@@ -8,7 +8,7 @@ type ResponseInterceptor = (response: AxiosResponse) => any
 abstract class HttpClientBase {
   protected readonly _axios: AxiosInstance
 
-  public constructor(config?: AxiosRequestConfig) {
+  protected constructor(config?: AxiosRequestConfig) {
     this._axios = axios.create(config)
   }
 
@@ -26,11 +26,13 @@ abstract class HttpClientBase {
   }
 }
 
-class HttpClient extends HttpClientBase {
+export class HttpClient extends HttpClientBase {
   private static _instance?: HttpClient
 
   private constructor() {
-    super()
+    super({
+      baseURL: 'https://',
+    })
     this.registerRequestInterceptor(RequestAuthInterceptor)
     this.registerResponseInterceptor(ResponseAuthInterceptor)
   }
@@ -43,4 +45,4 @@ class HttpClient extends HttpClientBase {
   }
 }
 
-export const http: AxiosInstance = HttpClient.instance
+export const http = HttpClient.instance

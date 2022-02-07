@@ -1,9 +1,5 @@
-import { http } from '../http'
-import type { KanyeQuote } from './../../models/index'
+import { http } from './../http/index'
+import type { KanyeQuote } from '~/models/kanye.model'
 
-enum KayneEndpoint {
-  quote = 'https://api.kanye.rest/',
-}
-
-export const getKanyeQuote = async(): Promise<KanyeQuote> =>
-  await http.get(KayneEndpoint.quote)
+export const getKanyeQuote = (): Promise<KanyeQuote> =>
+  http.get('api.kanye.rest')

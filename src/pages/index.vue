@@ -1,41 +1,57 @@
 <script lang="ts" setup>
-import { useQuery } from 'vue-query'
-import { getKanyeQuote } from '~/services/api/kanye'
+import { useQuote } from '~/composables'
 import { useCounterStore } from '~/store'
 
-const counterStore = useCounterStore()
-const quote = ref<string | null>()
+const { counter, increment } = toRefs(useCounterStore())
 
-const useKanyeQuote = () => useQuery('kanye', getKanyeQuote, {
-  onSuccess: data => quote.value = data.quote,
-  onError: () => quote.value = null,
-})
+const {
+  data,
+  isLoading,
+  isFetching,
+  isSuccess,
+  isError,
+  refetch,
+  error,
+  status,
+} = useQuote()
 
-const { isLoading, refetch, isSuccess, error, isError, isFetching } = useKanyeQuote()
-
-watch(() => counterStore.counter, () => refetch.value())
-
+watch(counter, () => refetch.value())
 </script>
 
 <template>
   <div class="flex flex-col gap-4 items-center">
     Hello
-    <p>{{ counterStore.counter }}</p>
-    <el-button type="primary" @click="counterStore.increment">
+    <p text="9xl" font="bold mono">
+      {{ counter }}
+    </p>
+    <p
+      class="uppercase rounded"
+      text="true-gray-500 dark:true-gray-300 xs"
+      bg="true-gray-100 dark:true-gray-800"
+      font="bold"
+      p="x-2 y-1"
+      m="t--4"
+    >
+      {{ status }}
+    </p>
+    <el-button type="primary" @click="increment">
       incrementaj za 1
+      <Icon i-carbon-add />
     </el-button>
-    <p v-if="isLoading">
+    <p v-if="isLoading" class="flex items-center" text="true-gray-500 dark:true-gray-300 xl">
       Loading...
+      <Icon i-carbon-progress-bar-round ml-2 />
     </p>
-    <p v-if="isSuccess" class="italic text-orange-400">
-      {{ quote }}
+    <p v-else-if="isSuccess && data" class="italic" text="orange-400">
+      {{ data.quote }}
+      <Icon i-carbon-checkmark ml-2 />
     </p>
-    <p v-if="isError" class="italic text-red-500 text-2xl">
+    <p v-else-if="isError" class="italic flex items-center" text="red-500 xl">
       {{ error }}
-      <span class="i-carbon-error text-4xl ml-2" />
+      <Icon i-carbon-error ml-2 />
     </p>
     <el-button type="warning" :disabled="isFetching" @click="refetch()">
-      get another one
+      another
     </el-button>
   </div>
 </template>
