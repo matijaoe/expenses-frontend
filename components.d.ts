@@ -6,6 +6,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     BaseButton: typeof import('./src/components/UI/BaseButton.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElInput: typeof import('element-plus/es')['ElInput']
     Footer: typeof import('./src/components/Footer.vue')['default']
     Icon: typeof import('./src/components/UI/Icon.vue')['default']
   }

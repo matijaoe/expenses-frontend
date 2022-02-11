@@ -1,5 +1,5 @@
-import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios from 'axios'
 import { RequestAuthInterceptor, ResponseAuthInterceptor } from './interceptors'
 
 type RequestInterceptor = (config: AxiosRequestConfig) => AxiosRequestConfig
@@ -31,7 +31,8 @@ export class HttpClient extends HttpClientBase {
 
   private constructor() {
     super({
-      baseURL: 'https://',
+      // baseURL: process.env.BASE_URL,
+      baseURL: 'http://localhost:5000/api',
     })
     this.registerRequestInterceptor(RequestAuthInterceptor)
     this.registerResponseInterceptor(ResponseAuthInterceptor)
