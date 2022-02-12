@@ -1,5 +1,5 @@
-import { http } from '../http'
-import type { Expense } from './../../models/expenses.model'
+import type { Expense } from 'models/expenses.model'
+import { http } from 'services/http'
 
 export const listExpenses = (): Promise<Expense[]> => http.get('/expenses')
 

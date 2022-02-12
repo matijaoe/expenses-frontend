@@ -1,5 +1,6 @@
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
+import type { GenericErrorResponse } from 'models'
 import { RequestAuthInterceptor, ResponseAuthInterceptor } from './interceptors'
 
 type RequestInterceptor = (config: AxiosRequestConfig) => AxiosRequestConfig
@@ -20,9 +21,19 @@ abstract class HttpClientBase {
     this._axios.interceptors.response.use(responseInterceptor, this._handleError)
   }
 
-  protected _handleError = (error: any) => {
-    console.error(error)
-    return Promise.reject(error)
+  protected _handleError = (error: AxiosError<GenericErrorResponse>) => {
+    const { request, response, message } = error
+    console.error('Error from interceptor', error)
+    let res = null
+    if (response)
+      res = response.data?.error || response.data?.message || 'Something went wrong'
+    else if (request)
+      res = request
+    else if (message)
+      res = message
+    else
+      res = 'Something went wrong'
+    return Promise.reject(res)
   }
 }
 

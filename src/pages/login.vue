@@ -8,24 +8,30 @@ const userData: UserLogin = reactive({
 })
 const { login, data, isError, error } = useLogin()
 const { logout } = useLogout()
+
+const loginUser = () => login(userData)
 </script>
 
 <template>
-  <h1>Login</h1>
-  <pre v-if="data">
-      {{ data }}
+  <div class="max-w-screen-md mx-auto">
+    <h1>Login</h1>
+    <pre v-if="data">
+      {{ data.user }}
   </pre>
-  <div v-if="isError">
-    {{ error }}
+    <div v-if="isError">
+      {{ error }}
+    </div>
+    <form @submit.prevent="loginUser">
+      <el-input v-model="userData.email" placeholder="Email" />
+      <el-input v-model="userData.password" type="password" placeholder="Password" />
+    </form>
+    <el-button class="block" @click="loginUser">
+      Login
+    </el-button>
+    <el-button class="block" type="danger" @click="logout">
+      Logout
+    </el-button>
   </div>
-  <el-input v-model="userData.email" placeholder="Email" />
-  <el-input v-model="userData.password" type="password" placeholder="Password" />
-  <el-button class="block" @click="() => login(userData)">
-    Login
-  </el-button>
-  <el-button class="block" type="danger" @click="logout">
-    Logout
-  </el-button>
 </template>
 
 <style lang="scss" scoped></style>

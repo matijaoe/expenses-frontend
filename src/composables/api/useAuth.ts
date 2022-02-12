@@ -14,14 +14,12 @@ export const useRegister = () => {
 }
 
 export const useLogin = () => {
-  // TODO
   const mutation = useMutation(login, {
     onSuccess: (data) => {
       // TODO: check if needed
       if ('user' in data && 'token' in data)
         userStore.setUserData(data)
     },
-
   })
 
   return {
