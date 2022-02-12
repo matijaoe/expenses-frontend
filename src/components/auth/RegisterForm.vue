@@ -12,23 +12,18 @@ const ruleFormRef = ref<FormInstance | null>(null)
 
 const router = useRouter()
 const { inputIconSize, iconWeight } = storeToRefs(useIconStore())
-
 const { visible, toggleVisiblity } = usePasswordVisibility()
 const { visible: repeatedVisible, toggleVisiblity: toggleRepeatedVisibility } =
   usePasswordVisibility()
 
-const { form, repeatedPassword, rules, error, onSubmit } = useRegisterForm()
-
-const { showRegisterError } = useErrorNotification()
-
 const roles = computed(() =>
-  Object.entries(UserRole).map(([key, value]) => ({
-    label: key,
-    value,
-  }))
+  Object.entries(UserRole).map(([label, value]) => ({ label, value }))
 )
 
-const submitForm = (form: any) =>
+const { form, repeatedPassword, rules, error, onSubmit } = useRegisterForm()
+const { showRegisterError } = useErrorNotification()
+
+const submitForm = () =>
   onSubmit(
     get(ruleFormRef),
     () => {

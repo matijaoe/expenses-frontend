@@ -11,12 +11,12 @@ const ruleFormRef = ref<FormInstance | null>(null)
 
 const router = useRouter()
 const { inputIconSize, iconWeight } = storeToRefs(useIconStore())
-const { form, rules, error, onSubmit } = useLoginForm()
 const { visible, toggleVisiblity } = usePasswordVisibility()
 
+const { form, rules, error, onSubmit } = useLoginForm()
 const { showLoginError } = useErrorNotification()
 
-const submitForm = (form: any) =>
+const submitForm = () =>
   onSubmit(
     get(ruleFormRef),
     () => {

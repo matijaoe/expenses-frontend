@@ -9,6 +9,7 @@ export const useErrorNotification = () => {
       title,
       message,
       type: 'error',
+      duration: 3000,
     })
   }
 

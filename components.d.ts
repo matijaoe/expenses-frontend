@@ -11,8 +11,6 @@ declare module 'vue' {
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElLink: typeof import('element-plus/es')['ElLink']
-    ElRadio: typeof import('element-plus/es')['ElRadio']
-    ElRadioB: typeof import('element-plus/es')['ElRadioB']
     ElRadioButton: typeof import('element-plus/es')['ElRadioButton']
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     Footer: typeof import('./src/components/layout/Footer.vue')['default']

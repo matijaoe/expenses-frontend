@@ -63,15 +63,15 @@ export default defineConfig({
           },
         }),
       ],
-      theme: {
-        fontFamily: {
-          sans: ['Manrope', 'sans-serif'],
-        },
-      },
+      // theme: {
+      //   fontFamily: {
+      //     sans: ['Space Mono'],
+      //   },
+      // },
     }),
     ViteFonts({
       google: {
-        families: ['Manrope'],
+        families: ['Space Mono'],
       },
     }),
   ],

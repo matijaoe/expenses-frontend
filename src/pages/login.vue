@@ -16,7 +16,6 @@ meta:
       Login
       <PhSignIn :weight="iconWeight" :color="iconColorPrimary" />
     </AuthFormTitle>
-
     <LoginForm />
   </div>
 </template>
