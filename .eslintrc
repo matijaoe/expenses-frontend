@@ -6,6 +6,15 @@
     "@typescript-eslint/brace-style": "off",
     "quote-props": "off",
     "vue/singleline-html-element-content-newline": "off",
-    "vue/multiline-html-element-content-newline": "off"
+    "vue/multiline-html-element-content-newline": "off",
+    "arrow-parens": "off",
+    "vue/html-closing-bracket-newline": [
+      "warn",
+      {
+        "singleline": "never",
+        "multiline": "always"
+      }
+    ],
+    "curly": "off"
   }
 }

@@ -6,10 +6,26 @@ declare module 'vue' {
   export interface GlobalComponents {
     BaseButton: typeof import('./src/components/UI/BaseButton.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
+    ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
+    ElCol: typeof import('element-plus/es')['ElCol']
+    ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElLink: typeof import('element-plus/es')['ElLink']
-    Footer: typeof import('./src/components/Footer.vue')['default']
+    ElOption: typeof import('element-plus/es')['ElOption']
+    ElRadio: typeof import('element-plus/es')['ElRadio']
+    ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
+    ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
+    Footer: typeof import('./src/components/layout/Footer.vue')['default']
     Icon: typeof import('./src/components/UI/Icon.vue')['default']
+    LoginForm: typeof import('./src/components/auth/LoginForm.vue')['default']
+    NavBar: typeof import('./src/components/nav/NavBar.vue')['default']
+    NavItem: typeof import('./src/components/nav/NavItem.vue')['default']
+    NavMenu: typeof import('./src/components/nav/NavMenu.vue')['default']
   }
 }
 

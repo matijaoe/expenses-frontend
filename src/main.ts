@@ -3,6 +3,7 @@ import '@unocss/reset/tailwind.css'
 import ElementPlus from 'element-plus'
 // Element Plus
 import 'element-plus/dist/index.css'
+import PhosphorVue from 'phosphor-vue'
 import { createPinia } from 'pinia'
 import 'uno.css'
 import { setupLayouts } from 'virtual:generated-layouts'
@@ -25,5 +26,6 @@ const router = createRouter({
 app.use(createPinia())
 app.use(router)
 app.use(ElementPlus)
+app.use(PhosphorVue)
 
 app.mount('#app')

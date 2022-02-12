@@ -13,6 +13,8 @@ export const useAuth = () => {
   const isSuccess = computed(() => get(error) === null)
 
   const register = async (userData: UserRegister) => {
+    set(error, null)
+
     try {
       const userWithToken = await auth.register(userData)
       userStore.setUserData(userWithToken)
@@ -25,6 +27,8 @@ export const useAuth = () => {
   }
 
   const login = async (credentials: UserLogin) => {
+    set(error, null)
+
     try {
       const userWithToken = await auth.login(credentials)
       userStore.setUserData(userWithToken)
@@ -37,6 +41,8 @@ export const useAuth = () => {
   }
 
   const logout = async () => {
+    set(error, null)
+
     try {
       const res = await auth.logout()
       userStore.clearUserData()
