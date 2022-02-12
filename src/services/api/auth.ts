@@ -3,8 +3,8 @@ import type { UserLogin, UserRegister } from 'models/auth.model'
 import type { UserWithToken } from 'models/user.model'
 import { http } from 'services/http'
 
-export const login = (userData: UserLogin): Promise<UserWithToken> =>
-  http.post('/login', userData)
+export const login = (credentials: UserLogin): Promise<UserWithToken> =>
+  http.post('/login', credentials)
 
 export const register = (userData: UserRegister): Promise<UserWithToken> =>
   http.post('/register', userData)

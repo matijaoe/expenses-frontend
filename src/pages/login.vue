@@ -1,36 +1,51 @@
 <script setup lang="ts">
-import { useLogin, useLogout } from 'composables/api/useAuth'
+import { useAuth } from 'composables/api/useAuth'
 import type { UserLogin } from 'models/auth.model'
+import { useUserStore } from 'store/user'
+
+const userStore = useUserStore()
 
 const userData: UserLogin = reactive({
   email: '',
   password: '',
 })
-const { login, data, isError, error } = useLogin()
-const { logout } = useLogout()
 
-const loginUser = () => login(userData)
+const router = useRouter()
+
+const { login, error, isError } = useAuth()
+
+const loginUser = async() => {
+  const loggedIn = await login(userData)
+  console.log('loggedIn :>> ', loggedIn)
+  if (loggedIn)
+    router.push('/')
+}
 </script>
+
+<route lang="yaml">
+meta:
+  layout: auth
+</route>
 
 <template>
   <div class="max-w-screen-md mx-auto">
-    <h1>Login</h1>
-    <pre v-if="data">
-      {{ data.user }}
-  </pre>
-    <div v-if="isError">
-      {{ error }}
-    </div>
-    <form @submit.prevent="loginUser">
-      <el-input v-model="userData.email" placeholder="Email" />
-      <el-input v-model="userData.password" type="password" placeholder="Password" />
-    </form>
-    <el-button class="block" @click="loginUser">
+    <h1 class="text-2xl text-left mb-2">
       Login
-    </el-button>
-    <el-button class="block" type="danger" @click="logout">
-      Logout
-    </el-button>
+    </h1>
+    <p v-if="isError" class="text-red-600">
+      {{ error }}
+    </p>
+    <form v-if="!userStore.isAuthenticated" class="flex flex-col gap-3 items-center mb-4" @submit.prevent="loginUser">
+      <el-input v-model="userData.email" placeholder="Email" />
+      <el-input
+        v-model="userData.password"
+        type="password"
+        placeholder="Password"
+      />
+      <el-button class="block" native-type="submit">
+        Login
+      </el-button>
+    </form>
   </div>
 </template>
 

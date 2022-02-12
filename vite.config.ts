@@ -7,6 +7,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import Pages from 'vite-plugin-pages'
+import Layouts from 'vite-plugin-vue-layouts'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
@@ -24,11 +25,8 @@ export default defineConfig({
       root: '.',
       extensions: ['.ts', '.tsx', '.js', '.jsx', '.vue'],
     }),
-
-    // https://github.com/hannoeru/vite-plugin-pages
     Pages(),
-
-    // https://github.com/antfu/unplugin-auto-import
+    Layouts(),
     AutoImport({
       imports: [
         'vue',
@@ -36,20 +34,16 @@ export default defineConfig({
         '@vueuse/core',
         'pinia',
         {
-          'vue-query': ['useQuery', 'useMutation'],
+          '@vueuse/core': ['get', 'set'],
         },
       ],
       resolvers: [ElementPlusResolver()],
       dts: true,
     }),
-
-    // https://github.com/antfu/vite-plugin-components
     Components({
       resolvers: [ElementPlusResolver()],
       dts: true,
     }),
-
-    // https://github.com/antfu/unocss
     Unocss({
       shortcuts: [
         [
@@ -63,7 +57,7 @@ export default defineConfig({
         presetIcons({
           scale: 1.2,
           extraProperties: {
-            'display': 'inline-block',
+            display: 'inline-block',
             'vertical-align': 'middle',
           },
         }),

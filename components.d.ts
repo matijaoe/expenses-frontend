@@ -7,6 +7,7 @@ declare module 'vue' {
     BaseButton: typeof import('./src/components/UI/BaseButton.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElLink: typeof import('element-plus/es')['ElLink']
     Footer: typeof import('./src/components/Footer.vue')['default']
     Icon: typeof import('./src/components/UI/Icon.vue')['default']
   }

@@ -1,6 +1,9 @@
 {
   "extends": "@antfu",
   "rules": {
-    "no-console": "off"
+    "no-console": "off",
+    "space-before-function-paren": "off",
+    "@typescript-eslint/brace-style": "off",
+    "quote-props": "off"
   }
 }

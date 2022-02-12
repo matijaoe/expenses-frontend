@@ -1,27 +1,26 @@
 // register vue composition api globally
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-
-import { createRouter, createWebHistory } from 'vue-router'
-import routes from 'virtual:generated-pages'
-import ElementPlus from 'element-plus'
-import { VueQueryPlugin } from 'vue-query'
-import App from './App.vue'
-
 import '@unocss/reset/tailwind.css'
+import ElementPlus from 'element-plus'
 // Element Plus
 import 'element-plus/dist/index.css'
+import { createPinia } from 'pinia'
+import 'uno.css'
+import { setupLayouts } from 'virtual:generated-layouts'
+import generatedRoutes from 'virtual:generated-pages'
+import { createApp } from 'vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import App from './App.vue'
 import './styles/element/index.scss'
 import './styles/main.scss'
-import 'uno.css'
 
 const app = createApp(App)
+
+const routes = setupLayouts(generatedRoutes)
+
 const router = createRouter({
   history: createWebHistory(),
   routes,
 })
-
-app.use(VueQueryPlugin)
 
 app.use(createPinia())
 app.use(router)

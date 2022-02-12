@@ -23,7 +23,7 @@ abstract class HttpClientBase {
 
   protected _handleError = (error: AxiosError<GenericErrorResponse>) => {
     const { request, response, message } = error
-    console.error('Error from interceptor', error)
+    console.error(error)
     let res = null
     if (response)
       res = response.data?.error || response.data?.message || 'Something went wrong'

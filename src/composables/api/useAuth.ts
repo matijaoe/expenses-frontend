@@ -1,41 +1,60 @@
+import { get, set } from '@vueuse/core'
 import type { UserLogin, UserRegister } from 'models/auth.model'
-import { login, logout, register } from 'services/api/auth'
+import * as auth from 'services/api/auth'
 import { useUserStore } from 'store/user'
 
-const userStore = useUserStore()
+export const useAuth = () => {
+  const userStore = useUserStore()
+  const { user, token } = storeToRefs(userStore)
 
-export const useRegister = () => {
-  const mutation = useMutation(register)
+  const error = ref<string | null>(null)
+  const isError = computed(() => get(error) !== null)
+  const isSuccess = computed(() => get(error) === null)
 
-  return {
-    ...mutation,
-    register: (data: UserRegister) => mutation.mutate(data),
+  const register = async (userData: UserRegister) => {
+    try {
+      const userWithToken = await auth.register(userData)
+      userStore.setUserData(userWithToken)
+      return userWithToken
+    } catch (err: any) {
+      console.error(err)
+      set(error, err)
+      return false
+    }
   }
-}
 
-export const useLogin = () => {
-  const mutation = useMutation(login, {
-    onSuccess: (data) => {
-      // TODO: check if needed
-      if ('user' in data && 'token' in data)
-        userStore.setUserData(data)
-    },
-  })
-
-  return {
-    ...mutation,
-    login: (data: UserLogin) => mutation.mutate(data),
+  const login = async (credentials: UserLogin) => {
+    try {
+      const userWithToken = await auth.login(credentials)
+      userStore.setUserData(userWithToken)
+      return userWithToken
+    } catch (err: any) {
+      console.error(err)
+      set(error, err)
+      return false
+    }
   }
-}
 
-// TODO: needs headers
-export const useLogout = () => {
-  const mutation = useMutation(logout, {
-    onSuccess: userStore.clearUserData,
-  })
+  const logout = async () => {
+    try {
+      const res = await auth.logout()
+      userStore.clearUserData()
+      return res
+    } catch (err) {
+      console.log(err)
+      set(error, err)
+      return false
+    }
+  }
 
   return {
-    ...mutation,
-    logout: () => mutation.mutate(),
+    user: readonly(user),
+    token: readonly(token),
+    register,
+    login,
+    logout,
+    error,
+    isError,
+    isSuccess,
   }
 }
