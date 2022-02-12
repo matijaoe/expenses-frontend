@@ -16,6 +16,7 @@
         "multiline": "always"
       }
     ],
-    "curly": "off"
+    "curly": "off",
+    "operator-linebreak": "off"
   }
 }

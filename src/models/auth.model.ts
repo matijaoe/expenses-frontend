@@ -5,4 +5,5 @@ export interface UserLogin {
   password: string
 }
 
-export type UserRegister = Omit<User, '_id' | 'createdAt' | 'updatedAt'> | { password: string }
+export type UserRegister =
+  | Omit<User, '_id' | 'createdAt' | 'updatedAt'> & { password: string }

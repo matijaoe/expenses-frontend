@@ -2,7 +2,7 @@
 import { PhSignIn } from 'phosphor-vue'
 import { useIconStore } from 'store/icons'
 
-const { inputColorPrimary, inputWeight } = storeToRefs(useIconStore())
+const { iconColorPrimary, iconWeight } = storeToRefs(useIconStore())
 </script>
 
 <route lang="yaml">
@@ -14,7 +14,7 @@ meta:
   <div>
     <AuthFormTitle>
       Login
-      <PhSignIn :weight="inputWeight" :color="inputColorPrimary" />
+      <PhSignIn :weight="iconWeight" :color="iconColorPrimary" />
     </AuthFormTitle>
 
     <LoginForm />

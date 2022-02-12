@@ -7,10 +7,15 @@ export interface User {
   _id: string
   name: string
   email: string
-  role: string
+  role: UserRole
   createdAt: string
   updatedAt: string
   __v?: number
+}
+
+export enum UserRole {
+  Admin = 'admin',
+  User = 'user',
 }
 
 export type UserUpdate = Partial<User> | { password?: string }

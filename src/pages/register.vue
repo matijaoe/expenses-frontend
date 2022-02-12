@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-import { PhSignpost } from 'phosphor-vue'
+import { PhIdentificationBadge } from 'phosphor-vue'
+import { useIconStore } from 'store/icons'
+const { iconColorPrimary, iconWeight } = storeToRefs(useIconStore())
 </script>
 
 <route lang="yaml">
@@ -11,7 +13,7 @@ meta:
   <div>
     <AuthFormTitle>
       Register
-      <PhSignpost weight="duotone" color="#409eff" />
+      <PhIdentificationBadge :weight="iconWeight" :color="iconColorPrimary" />
     </AuthFormTitle>
     <RegisterForm />
   </div>
