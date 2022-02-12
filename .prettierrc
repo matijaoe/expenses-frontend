@@ -3,6 +3,6 @@
   "bracketSpacing": true,
   "singleQuote": true,
   "arrowParens": "always",
-  "bracketSameLine": true,
+  "bracketSameLine": false,
   "htmlWhitespaceSensitivity": "ignore"
 }

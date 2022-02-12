@@ -20,6 +20,7 @@ specifiers:
   unocss: ^0.22.7
   unplugin-auto-import: ^0.5.11
   unplugin-vue-components: ^0.17.18
+  vee-validate: ^4.5.8
   vite: ^2.8.1
   vite-plugin-fonts: ^0.2.2
   vite-plugin-pages: ^0.20.2
@@ -37,6 +38,7 @@ dependencies:
   email-validator: 2.0.4
   phosphor-vue: 4.4.0_vue@3.2.30
   pinia: 2.0.11_typescript@4.5.5+vue@3.2.30
+  vee-validate: 4.5.8_vue@3.2.30
   vite-plugin-fonts: 0.2.2_vite@2.8.1
   vite-tsconfig-paths: 3.4.0_vite@2.8.1
   vue: 3.2.30
@@ -3081,6 +3083,15 @@ packages:
       spdx-correct: 3.1.1
       spdx-expression-parse: 3.0.1
     dev: true
+
+  /vee-validate/4.5.8_vue@3.2.30:
+    resolution: {integrity: sha512-XZx2J93rlET49CdIIoxG9R6wQNoT3RxUUw9ar3QbIhczpzbtlm4BQ+TpCA9DoYHKFlApcXnE28WU7m4quoPsCA==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      '@vue/devtools-api': 6.0.7
+      vue: 3.2.30
+    dev: false
 
   /vite-plugin-fonts/0.2.2_vite@2.8.1:
     resolution: {integrity: sha512-fhzhsrTiuzlDjSO6g5sV5EVIIvbb8lmsaIY6eUTBM4lcF55x40UBpHrcyvNwIhQG211g0lu83XC7oZlkmvdkMA==}

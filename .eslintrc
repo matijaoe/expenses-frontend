@@ -4,6 +4,7 @@
     "no-console": "off",
     "space-before-function-paren": "off",
     "@typescript-eslint/brace-style": "off",
+    "@typescript-eslint/comma-dangle": "off",
     "quote-props": "off",
     "vue/singleline-html-element-content-newline": "off",
     "vue/multiline-html-element-content-newline": "off",

@@ -2,13 +2,15 @@
 import { useAuth } from 'composables/api/auth'
 import type { UserLogin } from 'models/auth.model'
 import { PhEnvelope, PhEye, PhEyeClosed } from 'phosphor-vue'
-import { useGlobalStore } from 'store'
+import { useIconStore } from 'store/icons'
 
 import * as EmailValidator from 'email-validator'
 
 const router = useRouter()
 const { login, isSuccess, error } = useAuth()
-const { inputIconSize } = useGlobalStore()
+const { inputIconSize, inputColorPrimary, inputWeight } = storeToRefs(
+  useIconStore()
+)
 
 const form: UserLogin = reactive({
   email: '',
@@ -74,13 +76,14 @@ const onSubmit = async () => {
     :model="form"
     :rules="rules"
     label-width="120px"
-    class="max-w-[450px] mx-auto -translate-x-10"
+    class="max-w-[450px]"
     size="large"
-    @submit.prevent="onSubmit">
+    @submit.prevent="onSubmit"
+  >
     <el-form-item label="Email" prop="email">
       <el-input v-model="form.email" type="text">
         <template #prefix>
-          <PhEnvelope :size="inputIconSize" />
+          <PhEnvelope :size="inputIconSize" weight="duotone" color="#409eff" />
         </template>
       </el-input>
     </el-form-item>
@@ -88,11 +91,22 @@ const onSubmit = async () => {
       <el-input
         id="passwordInput"
         v-model="form.password"
-        :type="passwordVisible ? 'text' : 'password'">
+        :type="passwordVisible ? 'text' : 'password'"
+      >
         <template #prefix>
           <div class="cursor-pointer" @click.stop="togglePasswordVisiblity">
-            <PhEye v-if="passwordVisible" :size="inputIconSize" />
-            <PhEyeClosed v-else :size="inputIconSize" />
+            <PhEye
+              v-if="passwordVisible"
+              :size="inputIconSize"
+              :weight="inputWeight"
+              :color="inputColorPrimary"
+            />
+            <PhEyeClosed
+              v-else
+              :size="inputIconSize"
+              :weight="inputWeight"
+              :color="inputColorPrimary"
+            />
           </div>
         </template>
       </el-input>

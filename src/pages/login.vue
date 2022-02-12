@@ -1,4 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { PhSignIn } from 'phosphor-vue'
+import { useIconStore } from 'store/icons'
+
+const { inputColorPrimary, inputWeight } = storeToRefs(useIconStore())
+</script>
 
 <route lang="yaml">
 meta:
@@ -6,9 +11,12 @@ meta:
 </route>
 
 <template>
-  <div
-    class="max-w-screen-md mx-auto flex flex-col items-center -translate-y-[15vh]"
-  >
+  <div>
+    <AuthFormTitle>
+      Login
+      <PhSignIn :weight="inputWeight" :color="inputColorPrimary" />
+    </AuthFormTitle>
+
     <LoginForm />
   </div>
 </template>

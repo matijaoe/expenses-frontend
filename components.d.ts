@@ -4,6 +4,7 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AuthFormTitle: typeof import('./src/components/auth/AuthFormTitle.vue')['default']
     BaseButton: typeof import('./src/components/UI/BaseButton.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
@@ -26,6 +27,7 @@ declare module 'vue' {
     NavBar: typeof import('./src/components/nav/NavBar.vue')['default']
     NavItem: typeof import('./src/components/nav/NavItem.vue')['default']
     NavMenu: typeof import('./src/components/nav/NavMenu.vue')['default']
+    RegisterForm: typeof import('./src/components/auth/RegisterForm.vue')['default']
   }
 }
 
