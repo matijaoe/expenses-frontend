@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { useAuth } from 'composables/api/useAuth'
+import { useAuth, useStoredLogin } from 'composables/api/auth'
 import { useUserStore } from 'store/user'
 
 const userStore = useUserStore()
 
-userStore.checkSavedLogin()
-
 const { logout } = useAuth()
+const { checkSavedLogin } = useStoredLogin()
+
+checkSavedLogin()
 </script>
 
 <template>

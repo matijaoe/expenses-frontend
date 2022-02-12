@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAuth } from 'composables/api/useAuth'
+import { useAuth } from 'composables/api/auth'
 import type { UserLogin } from 'models/auth.model'
 import { useUserStore } from 'store/user'
 
@@ -14,11 +14,10 @@ const router = useRouter()
 
 const { login, error, isError } = useAuth()
 
-const loginUser = async() => {
+const loginUser = async () => {
   const loggedIn = await login(userData)
   console.log('loggedIn :>> ', loggedIn)
-  if (loggedIn)
-    router.push('/')
+  if (loggedIn) router.push('/')
 }
 </script>
 
@@ -29,22 +28,22 @@ meta:
 
 <template>
   <div class="max-w-screen-md mx-auto">
-    <h1 class="text-2xl text-left mb-2">
-      Login
-    </h1>
+    <h1 class="text-2xl text-left mb-2">Login page</h1>
     <p v-if="isError" class="text-red-600">
       {{ error }}
     </p>
-    <form v-if="!userStore.isAuthenticated" class="flex flex-col gap-3 items-center mb-4" @submit.prevent="loginUser">
+    <form
+      v-if="!userStore.isAuthenticated"
+      class="flex flex-col gap-3 items-center mb-4"
+      @submit.prevent="loginUser"
+    >
       <el-input v-model="userData.email" placeholder="Email" />
       <el-input
         v-model="userData.password"
         type="password"
         placeholder="Password"
       />
-      <el-button class="block" native-type="submit">
-        Login
-      </el-button>
+      <el-button class="block" native-type="submit">Login</el-button>
     </form>
   </div>
 </template>
