@@ -1,17 +1,6 @@
 import type { User, UserUpdate } from 'models/user.model'
 import * as api from 'services/api/user'
-
-const useResultState = () => {
-  const error = ref<string | null>(null)
-  const isError = computed(() => get(error) !== null)
-  const isSuccess = computed(() => get(error) === null)
-
-  return {
-    error,
-    isError,
-    isSuccess,
-  }
-}
+import { useResultState } from '..'
 
 export const useUser = () => {
   const user = ref<User>()

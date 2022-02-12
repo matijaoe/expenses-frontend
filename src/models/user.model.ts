@@ -1,4 +1,3 @@
-
 export interface UserWithToken {
   user: User
   token: string
