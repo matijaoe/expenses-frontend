@@ -1,12 +1,15 @@
 <script lang="ts" setup>
-import { useAuth } from 'composables/api/auth'
+import { useUserStore } from 'store/user'
+import { titleCase } from 'title-case'
 
-const { user } = useAuth()
+const userStore = useUserStore()
 </script>
 
 <template>
   <div class="flex flex-col gap-4 items-center">
-    Hello
-    {{ user }}
+    <h2 class="mt-4 text-5xl">
+      Welcome back
+      <span>{{ titleCase(userStore.user?.name as string) }}!</span>
+    </h2>
   </div>
 </template>

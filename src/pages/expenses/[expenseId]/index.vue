@@ -23,7 +23,7 @@ watchEffect(() => {
         <el-link target="_blank">
           <div class="flex items-center gap-1">
             <ph-caret-left :weight="iconWeight" />
-            Back to all expenses
+            Back to expenses
           </div>
         </el-link>
       </router-link>
