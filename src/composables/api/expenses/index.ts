@@ -1,8 +1,4 @@
-import type {
-  Expense,
-  ExpenseCreate,
-  ExpenseUpdate,
-} from 'models/expenses.model'
+import type { Expense, ExpenseCreate, ExpenseEdit } from 'models/expenses.model'
 import * as api from 'services/api/expenses'
 import { useExpensesStore } from 'store/expenses'
 import { useResultState } from '..'
@@ -80,7 +76,7 @@ export const useExpenseCreate = () => {
       if (newExpense) {
         set(expense, newExpense)
         store.addExpense(newExpense)
-        return expense
+        return newExpense
       }
     } catch (err) {
       set(error, err)
@@ -102,13 +98,13 @@ export const useExpenseUpdate = () => {
   const expense = ref<Expense>()
   const { error, isError, isSuccess } = useResultState()
 
-  const updateExpense = async (id: string, expenseData: ExpenseUpdate) => {
+  const updateExpense = async (id: string, expenseData: ExpenseEdit) => {
     try {
       const updatedExpense = await api.updateExpense(id, expenseData)
       if (updatedExpense) {
         set(expense, updatedExpense)
         store.updateExpense(updatedExpense)
-        return expense
+        return updatedExpense
       }
     } catch (err) {
       set(error, err)

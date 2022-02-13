@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useCreateExpenseForm } from 'composables/form/useExpenseForm'
+import { useCreateExpenseForm } from 'composables/form/useCreateExpenseForm'
 import type { Expense, ExpenseAction } from 'models/expenses.model'
 import { useIconStore } from 'store/icons'
 import { PhCalendar } from 'phosphor-vue'

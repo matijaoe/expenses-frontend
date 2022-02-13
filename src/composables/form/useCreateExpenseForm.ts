@@ -87,7 +87,7 @@ export const useCreateExpenseForm = () => {
         console.log('newExpense :>> ', newExpense)
         if (isSuccess && newExpense) {
           await onSuccess()
-          return newExpense.value
+          return newExpense
         }
       }
       onError()

@@ -23,7 +23,8 @@ export interface ExpenseCreate {
   owner: string
   category: string
 }
-export type ExpenseUpdate = Partial<Expense>
+
+export type ExpenseEdit = Partial<ExpenseCreate>
 
 export enum Currency {
   USD = 'USD',
