@@ -4,7 +4,7 @@ import { useExpensesStore } from 'store/expenses'
 
 import { useIconStore } from 'store/icons'
 
-const { fetchExpenses, isSuccess, loading, isError } = useExpenses()
+const { fetchExpenses, loading, isError } = useExpenses()
 const { expenses, hasExpenses } = storeToRefs(useExpensesStore())
 const { iconWeight } = storeToRefs(useIconStore())
 
@@ -20,7 +20,7 @@ fetchExpenses()
       :loading="loading"
     />
   </section>
-  <div v-else-if="!expenses && !loading">
+  <div v-else-if="!hasExpenses && !loading">
     <div
       class="text-2xl font-light text-blue-400 flex flex-col items-center justify-center gap-2 py-4"
     >
