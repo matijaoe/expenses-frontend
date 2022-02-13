@@ -63,11 +63,6 @@ export default defineConfig({
           },
         }),
       ],
-      // theme: {
-      //   fontFamily: {
-      //     sans: ['Space Mono'],
-      //   },
-      // },
     }),
     ViteFonts({
       google: {

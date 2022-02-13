@@ -1,4 +1,6 @@
 // register vue composition api globally
+import ContextMenu from '@imengyu/vue3-context-menu'
+import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import '@unocss/reset/tailwind.css'
 import ElementPlus from 'element-plus'
 // Element Plus
@@ -27,5 +29,6 @@ app.use(createPinia())
 app.use(router)
 app.use(ElementPlus)
 app.use(PhosphorVue)
+app.use(ContextMenu)
 
 app.mount('#app')

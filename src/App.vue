@@ -7,7 +7,7 @@ checkSavedLogin()
 </script>
 
 <template>
-  <main class="h-full">
+  <main >
     <router-view />
   </main>
 </template>

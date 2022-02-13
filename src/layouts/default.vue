@@ -9,7 +9,8 @@ const { logout } = useAuth()
 
 <template>
   <div
-    class="bg-white dark:bg-true-gray-900 h-full p-4"
+    class="bg-white dark:bg-true-gray-900 h-full p-4 max-w-5xl mx-auto"
+    p="8"
     text="center true-gray-700 dark:true-gray-200"
     font="sans medium"
   >
