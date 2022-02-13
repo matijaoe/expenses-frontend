@@ -5,6 +5,8 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import PhosphorVue from 'phosphor-vue'
 import { createPinia } from 'pinia'
+import LocalStorageService from 'services/local_storage'
+import { useUserStore } from 'store/user'
 import 'uno.css'
 import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
@@ -27,5 +29,21 @@ app.use(createPinia())
 app.use(router)
 app.use(ElementPlus)
 app.use(PhosphorVue)
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.meta.auth
+  const hasNoToken = !LocalStorageService.instance.hasAccessToken()
+  if (requiresAuth && hasNoToken) {
+    return next('/login')
+  }
+
+  const userStore = useUserStore()
+
+  const requiresAdmin = to.meta?.admin
+  if (requiresAdmin && !userStore.isAdmin) {
+    return next('/')
+  }
+  next()
+})
 
 app.mount('#app')

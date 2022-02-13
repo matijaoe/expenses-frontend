@@ -13,8 +13,6 @@ declare module 'vue' {
     ElInput: typeof import('element-plus/es')['ElInput']
     ElLink: typeof import('element-plus/es')['ElLink']
     ElOption: typeof import('element-plus/es')['ElOption']
-    ElRadioButton: typeof import('element-plus/es')['ElRadioButton']
-    ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
@@ -26,7 +24,6 @@ declare module 'vue' {
     LoginForm: typeof import('./src/components/auth/LoginForm.vue')['default']
     NavBar: typeof import('./src/components/nav/NavBar.vue')['default']
     NavItem: typeof import('./src/components/nav/NavItem.vue')['default']
-    NavMenu: typeof import('./src/components/nav/NavMenu.vue')['default']
     PageTitle: typeof import('./src/components/UI/PageTitle.vue')['default']
     RegisterForm: typeof import('./src/components/auth/RegisterForm.vue')['default']
   }
