@@ -6,7 +6,7 @@ import { useUserStore } from 'store/user'
 
 export const useCreateExpenseForm = () => {
   const { user } = storeToRefs(useUserStore())
-  const { createExpense, isSuccess, expense: newExpense } = useExpenseCreate()
+  const { createExpense, isSuccess } = useExpenseCreate()
 
   const expense: ExpenseCreate = reactive({
     title: '',
@@ -62,27 +62,11 @@ export const useCreateExpenseForm = () => {
     ],
   })
 
-  const disabledDate = (time: Date) => {
-    return time.getTime() > Date.now()
-  }
+  const disabledDate = (time: Date) => time.getTime() > Date.now()
 
   const currencies = computed(() =>
     Object.entries(Currency).map(([label, value]) => ({ label, value }))
   )
-
-  const onSubmit2 = async () => {
-    try {
-      const newExpense = await createExpense(expense)
-      console.log('newExpense :>> ', newExpense)
-      if (isSuccess && newExpense) {
-        return newExpense.value
-      }
-      return null
-    } catch (err) {
-      console.log(err)
-      return null
-    }
-  }
 
   const onSubmit = async (
     formEl: InstanceType<typeof ElForm> | null,
@@ -93,11 +77,11 @@ export const useCreateExpenseForm = () => {
     formEl.validate(async (valid: any) => {
       if (valid) {
         const newExpense = await createExpense(expense)
+        console.log('newExpense :>> ', newExpense)
         if (isSuccess && newExpense) {
           await onSuccess()
           return newExpense.value
         }
-        return null
       }
       onError()
       return null

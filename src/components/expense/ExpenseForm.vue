@@ -25,15 +25,6 @@ const {
   onSubmit,
 } = useCreateExpenseForm()
 
-// const submitForm = async () => {
-//   const newExpense: Expense | null | undefined = await onSubmit()
-//   if (newExpense) {
-//     router.replace('/expenses')
-//   } else {
-//     showCreateExpenseError(null)
-//   }
-// }
-
 const submitForm = () =>
   onSubmit(
     get(ruleFormRef),
@@ -82,7 +73,7 @@ const submitForm = () =>
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="Price" prop="price" class="flex-1">
+      <el-form-item label="Price" prop="amount" class="flex-1">
         <el-input v-model="form.amount" type="number" :step="0.01">
           <template #prefix>
             <CurrencyIcon
