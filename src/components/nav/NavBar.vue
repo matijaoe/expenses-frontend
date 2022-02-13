@@ -18,6 +18,9 @@ const iconSize = ref(20)
       <NavItem label="Expenses" to="/expenses">
         <PhReceipt :weight="iconWeight" :size="iconSize" />
       </NavItem>
+      <NavItem label="New expense" to="/expenses/new" type="primary">
+        <PhPlusCircle :weight="iconWeight" :size="iconSize" />
+      </NavItem>
     </div>
     <div class="flex items-center gap-6">
       <template v-if="!userStore.isAuthenticated">

@@ -34,7 +34,7 @@ export const useCreateExpenseForm = () => {
     description: [
       {
         min: 2,
-        max: 24,
+        max: 255,
         message: 'Description too long',
         trigger: 'blur',
       },

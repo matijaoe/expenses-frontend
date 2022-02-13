@@ -2,7 +2,7 @@
 
 <template>
   <div class="h-full p-4 flex flex-col items-center justify-center" font="mono">
-    <div class="flex flex-col -mt-[5vh]">
+    <div class="flex flex-col -mt-[5vh] mb-8">
       <router-view />
     </div>
   </div>

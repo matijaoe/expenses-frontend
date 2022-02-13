@@ -2,6 +2,7 @@
 defineProps<{
   label: string
   to?: string | object
+  type?: 'default' | 'primary' | 'success' | 'danger' | 'warning' | 'info'
 }>()
 defineEmits(['click'])
 </script>
@@ -9,14 +10,14 @@ defineEmits(['click'])
 <template>
   <div>
     <router-link v-if="to" :to="to">
-      <el-link>
+      <el-link :type="type ?? 'default'">
         <div class="flex items-center gap-1">
           <slot />
           {{ label }}
         </div>
       </el-link>
     </router-link>
-    <el-link v-else @click="$emit('click')">
+    <el-link v-else :type="type ?? 'default'" @click="$emit('click')">
       <div class="flex items-center gap-1">
         {{ label }}
         <slot />
