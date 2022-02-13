@@ -6,6 +6,7 @@ import { titleCase } from 'title-case'
 import { PhPencil, PhTrash } from 'phosphor-vue'
 import { useIconStore } from 'store/icons'
 import { useDeleteHandle } from 'composables/helpers/useDeleteHandle'
+import { useCategoryStore } from 'store/categories'
 
 const props = defineProps<{
   expense: Expense
@@ -17,11 +18,15 @@ const { iconWeight } = storeToRefs(useIconStore())
 const { formatDate } = useDate()
 const { formatAmount } = usePrice()
 const { handleExpenseDelete } = useDeleteHandle()
+const categoryStore = useCategoryStore()
 
 const formattedDate = computed(() =>
   formatDate(props.expense.date, DateFormat.LONG)
 )
 const formattedAmount = computed(() => formatAmount(props.expense.amount))
+const category = computed(
+  () => categoryStore.getCategoryById(props.expense.category)?.name ?? 'Unknown'
+)
 
 const onDelete = async () => {
   const success = await handleExpenseDelete(props.expense._id)
@@ -35,7 +40,7 @@ const onDelete = async () => {
   <div>
     <div class="flex items-baseline justify-between gap-4">
       <div class="flex items-center gap-2">
-        <el-tag size="small">School</el-tag>
+        <el-tag size="small">{{ category }}</el-tag>
       </div>
       <div>
         <el-button size="small" type="primary" plain>

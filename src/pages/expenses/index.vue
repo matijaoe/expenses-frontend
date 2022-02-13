@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import { useExpenses } from 'composables/api/expenses'
+import { useCategoryStore } from 'store/categories'
 import { useExpensesStore } from 'store/expenses'
 import { useIconStore } from 'store/icons'
 const { iconColorPrimary, iconWeight } = storeToRefs(useIconStore())
 const { fetchExpenses } = useExpenses()
+const categoryStore = useCategoryStore()
 const expensesStore = useExpensesStore()
+
+const onRefresh = () => {
+  fetchExpenses()
+  categoryStore.fetchCategories()
+}
 </script>
 
 <template>
@@ -19,7 +26,7 @@ const expensesStore = useExpensesStore()
       <router-link to="/expenses/new">
         <el-button type="primary">Add expense</el-button>
       </router-link>
-      <div class="ml-4" @click="fetchExpenses">
+      <div class="ml-4" @click="onRefresh">
         <PhArrowClockwise
           class="hover:animate-spin cursor-pointer text-sm"
           :color="iconColorPrimary"

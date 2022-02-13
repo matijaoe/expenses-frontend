@@ -20,7 +20,7 @@ fetchExpenses()
       :loading="loading"
     />
   </section>
-  <div v-else-if="isSuccess && !hasExpenses">
+  <div v-else-if="!expenses && !loading">
     <div
       class="text-2xl font-light text-blue-400 flex flex-col items-center justify-center gap-2 py-4"
     >

@@ -15,7 +15,7 @@ export const useCreateExpenseForm = () => {
     currency: Currency.USD,
     date: '',
     owner: user.value!._id,
-    // category: '',
+    category: '',
   })
 
   const rules = reactive({
@@ -50,6 +50,13 @@ export const useCreateExpenseForm = () => {
       {
         required: true,
         message: 'Please enter expense amount',
+        trigger: 'blur',
+      },
+    ],
+    category: [
+      {
+        required: true,
+        message: 'Please select a category',
         trigger: 'blur',
       },
     ],

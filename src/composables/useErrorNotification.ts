@@ -28,7 +28,7 @@ export const useErrorNotification = () => {
   const showCreateExpenseError = (error: string | null) =>
     showNotification({
       title: 'Invalid expense data',
-      message: error || 'Please check your details and try again',
+      message: error || 'Please check expense details and try again',
     })
 
   return {

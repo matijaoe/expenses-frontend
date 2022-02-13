@@ -14,8 +14,5 @@ export const updateExpense = (
   expense: Partial<Expense>
 ): Promise<Expense> => http.patch(`/expenses/${id}`, expense)
 
-export const replaceExpense = (expense: Expense): Promise<Expense> =>
-  http.put('/expenses', expense)
-
 export const deleteExpense = (id: string): Promise<Expense> =>
   http.delete(`/expenses/${id}`)

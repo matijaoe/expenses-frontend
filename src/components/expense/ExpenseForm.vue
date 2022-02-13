@@ -5,6 +5,7 @@ import { useIconStore } from 'store/icons'
 import { PhCalendar } from 'phosphor-vue'
 import { useErrorNotification } from 'composables/useErrorNotification'
 import type { FormInstance } from 'models/element.model'
+import { useCategoryStore } from 'store/categories'
 defineProps<{
   action: ExpenseAction
   currentExpense?: Expense
@@ -34,6 +35,9 @@ const submitForm = () =>
     },
     () => showCreateExpenseError(null)
   )
+
+const categoryStore = useCategoryStore()
+categoryStore.fetchCategories()
 </script>
 
 <template>
@@ -95,16 +99,20 @@ const submitForm = () =>
           :prefix-icon="PhCalendar"
         />
       </el-form-item>
-      <!-- <el-form-item label="Category" prop="category">
-        <el-select v-model="form.category" placeholder="Select a category" size="large">
+      <el-form-item label="Category" prop="category" class="flex-1">
+        <el-select
+          v-model="form.category"
+          placeholder="Select a category"
+          size="large"
+        >
           <el-option
-            v-for="item in currencies"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
+            v-for="item in categoryStore.categories"
+            :key="item._id"
+            :label="item.name"
+            :value="item._id"
           />
         </el-select>
-      </el-form-item> -->
+      </el-form-item>
     </div>
     <el-form-item>
       <el-button type="primary" native-type="submit">

@@ -5,6 +5,7 @@ import { titleCase } from 'title-case'
 import { DateFormat, useDate } from 'composables/helpers/useDate'
 import { usePrice } from 'composables/helpers/useCurrency'
 import { useDeleteHandle } from 'composables/helpers/useDeleteHandle'
+import { useCategoryStore } from 'store/categories'
 
 const props = defineProps<{
   expense: Expense
@@ -16,10 +17,16 @@ const { iconColorPrimary, iconWeight } = storeToRefs(useIconStore())
 const { formatDate } = useDate()
 const { formatAmount } = usePrice()
 const { handleExpenseDelete } = useDeleteHandle()
+const categoryStore = useCategoryStore()
 
 const formattedDate = computed(() =>
   formatDate(props.expense.date, DateFormat.SHORT)
 )
+
+const category = computed(
+  () => categoryStore.getCategoryById(props.expense.category)?.name ?? 'Unknown'
+)
+
 const formattedAmount = computed(() => formatAmount(props.expense.amount))
 </script>
 
@@ -54,7 +61,7 @@ const formattedAmount = computed(() => formatAmount(props.expense.amount))
               </p>
             </div>
             <div class="flex items-center gap-4">
-              <el-tag size="small">School</el-tag>
+              <el-tag size="small">{{ category }}</el-tag>
               <el-tooltip
                 effect="light"
                 content="Delete expense"

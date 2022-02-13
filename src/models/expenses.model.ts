@@ -6,6 +6,7 @@ export interface Expense {
   currency: Currency
   date: string
   owner: string
+  category: string
   createdAt: string
   updatedAt: string
   __v?: number
@@ -20,6 +21,7 @@ export interface ExpenseCreate {
   currency: Currency
   date: string
   owner: string
+  category: string
 }
 export type ExpenseUpdate = Partial<Expense>
 
