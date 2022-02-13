@@ -29,7 +29,6 @@ export default defineConfig({
     Pages({
       extendRoute(route) {
         if (route.path === '/login' || route.path === '/register') {
-          // Index is unauthenticated.
           return route
         }
 
@@ -39,7 +38,6 @@ export default defineConfig({
           meta.admin = true
         }
 
-        // Augment the route with meta that indicates that the route requires authentication.
         return {
           ...route,
           meta,
@@ -65,12 +63,7 @@ export default defineConfig({
       dts: true,
     }),
     Unocss({
-      shortcuts: [
-        [
-          'btn',
-          'px-4 py-1 rounded inline-block bg-teal-600 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50',
-        ],
-      ],
+      shortcuts: [],
       presets: [presetUno(), presetAttributify()],
       theme: {
         fontFamily: {

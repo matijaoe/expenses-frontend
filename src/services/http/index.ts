@@ -1,4 +1,9 @@
-import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import type {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+} from 'axios'
 import axios from 'axios'
 import type { GenericErrorResponse } from 'models'
 import { RequestAuthInterceptor, ResponseAuthInterceptor } from './interceptors'
@@ -13,12 +18,19 @@ abstract class HttpClientBase {
     this._axios = axios.create(config)
   }
 
-  protected registerRequestInterceptor = (requestInterceptor: RequestInterceptor) => {
+  protected registerRequestInterceptor = (
+    requestInterceptor: RequestInterceptor
+  ) => {
     this._axios.interceptors.request.use(requestInterceptor, this._handleError)
   }
 
-  protected registerResponseInterceptor = (responseInterceptor: ResponseInterceptor) => {
-    this._axios.interceptors.response.use(responseInterceptor, this._handleError)
+  protected registerResponseInterceptor = (
+    responseInterceptor: ResponseInterceptor
+  ) => {
+    this._axios.interceptors.response.use(
+      responseInterceptor,
+      this._handleError
+    )
   }
 
   protected _handleError = (error: AxiosError<GenericErrorResponse>) => {
@@ -26,13 +38,11 @@ abstract class HttpClientBase {
     console.error(error)
     let res = null
     if (response)
-      res = response.data?.error || response.data?.message || 'Something went wrong'
-    else if (request)
-      res = request
-    else if (message)
-      res = message
-    else
-      res = 'Something went wrong'
+      res =
+        response.data?.error || response.data?.message || 'Something went wrong'
+    else if (request) res = request
+    else if (message) res = message
+    else res = 'Something went wrong'
     return Promise.reject(res)
   }
 }
@@ -42,6 +52,7 @@ export class HttpClient extends HttpClientBase {
 
   private constructor() {
     super({
+      // TODO: move to environment variables
       // baseURL: process.env.BASE_URL,
       baseURL: 'http://localhost:5000/api',
     })
@@ -50,8 +61,7 @@ export class HttpClient extends HttpClientBase {
   }
 
   static get instance(): AxiosInstance {
-    if (!this._instance)
-      this._instance = new HttpClient()
+    if (!this._instance) this._instance = new HttpClient()
 
     return this._instance._axios
   }
