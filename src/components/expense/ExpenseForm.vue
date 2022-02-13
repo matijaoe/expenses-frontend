@@ -13,6 +13,7 @@ const props = defineProps<{
 }>()
 const emits = defineEmits(['submit', 'error'])
 
+const router = useRouter()
 const { inputIconSize, iconWeight, iconColorPrimary } = storeToRefs(
   useIconStore()
 )
@@ -108,7 +109,13 @@ const emitSubmit = () => emits('submit', { formRef, form })
       <el-button type="primary" native-type="submit">
         <div class="flex items-center gap-2">
           {{ submitMsg }}
-          <PhPlusCircle :weight="iconWeight" size="20" />
+          <PhPlusCircle :weight="iconWeight" :size="20" />
+        </div>
+      </el-button>
+      <el-button plain native-type="button" @click="router.back()">
+        <div class="flex items-center gap-2">
+          Cancel
+          <PhXCircle :weight="iconWeight" :size="20" />
         </div>
       </el-button>
     </el-form-item>

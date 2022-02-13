@@ -85,11 +85,10 @@ export const useCreateExpenseForm = () => {
         if (isSuccess && newExpense) {
           ElNotification.closeAll()
           router.replace(routeRedirect)
-          return newExpense
+          return
         }
       }
       showMutateExpenseError(null)
-      return null
     })
   }
 

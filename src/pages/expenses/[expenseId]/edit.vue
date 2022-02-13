@@ -31,7 +31,7 @@ const submitForm = ({ formRef, form }: SubmitFormArgs) =>
       class="mt-8"
       :model="expenseModel"
       :rules="rules"
-      submit-msg="Add expense"
+      submit-msg="Edit expense"
       @submit="submitForm"
     />
   </div>

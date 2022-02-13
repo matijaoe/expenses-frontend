@@ -91,6 +91,7 @@ export const useEditExpenseForm = () => {
         if (isSuccess && editedExpense) {
           ElNotification.closeAll()
           router.replace(routeRedirect)
+          return
         }
       }
       showMutateExpenseError(null)
