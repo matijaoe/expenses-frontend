@@ -2,8 +2,8 @@
 
 <template>
   <div
-    class="bg-white dark:bg-true-gray-900 h-full p-4 max-w-5xl mx-auto"
-    p="y-4 x-6"
+    class="h-full max-w-5xl mx-auto"
+    p="4"
     text="true-gray-800 dark:true-gray-200"
     font="mono medium"
   >

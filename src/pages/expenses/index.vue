@@ -3,6 +3,7 @@ import { useExpenses } from 'composables/api/expenses'
 import { useCategoryStore } from 'store/categories'
 import { useExpensesStore } from 'store/expenses'
 import { useIconStore } from 'store/icons'
+
 const { iconColorPrimary, iconWeight } = storeToRefs(useIconStore())
 const { fetchExpenses } = useExpenses()
 const categoryStore = useCategoryStore()

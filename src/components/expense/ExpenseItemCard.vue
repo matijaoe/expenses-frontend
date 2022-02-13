@@ -35,7 +35,7 @@ const formattedAmount = computed(() => formatAmount(props.expense.amount))
     <article
       v-if="!loading"
       class="expense rounded transition duration-100 ease-in-out"
-      bg="hover:blue-100 hover:opacity-20 "
+      bg="white hover:blue-100 hover:opacity-20 "
       border="true-gray-100 2 hover:blue-200"
       p="4"
       :data-id="expense._id"

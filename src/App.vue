@@ -9,7 +9,7 @@ categoryStore.fetchCategories()
 </script>
 
 <template>
-  <div>
+  <div class="bg-red-200 h-full" bg="light-50">
     <router-view />
   </div>
 </template>
