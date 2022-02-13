@@ -12,7 +12,10 @@ export interface Expense {
   __v?: number
 }
 
-export type ExpenseAction = 'add' | 'edit'
+export enum ExpenseAction {
+  CREATE = 'create',
+  EDIT = 'edit',
+}
 
 export interface ExpenseCreate {
   title: string

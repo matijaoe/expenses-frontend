@@ -8,7 +8,7 @@ export const useCreateExpenseForm = () => {
   const { user } = storeToRefs(useUserStore())
   const { createExpense, isSuccess } = useExpenseCreate()
 
-  const expense: ExpenseCreate = reactive({
+  const expenseModel: ExpenseCreate = reactive({
     title: '',
     description: '',
     amount: null,
@@ -69,17 +69,13 @@ export const useCreateExpenseForm = () => {
     ],
   })
 
-  const disabledDate = (time: Date) => time.getTime() > Date.now()
-
-  const currencies = computed(() =>
-    Object.entries(Currency).map(([label, value]) => ({ label, value }))
-  )
-
   const onSubmit = async (
+    expense: ExpenseCreate,
     formEl: InstanceType<typeof ElForm> | null,
     onSuccess: Function,
     onError: Function
   ) => {
+    console.log('expense', expense)
     if (!formEl) return
     formEl.validate(async (valid: any) => {
       if (valid) {
@@ -95,9 +91,7 @@ export const useCreateExpenseForm = () => {
   }
 
   return {
-    expense,
-    disabledDate,
-    currencies,
+    expenseModel,
     onSubmit,
     rules,
   }

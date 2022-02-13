@@ -1,55 +1,45 @@
 <script setup lang="ts">
-import { useCreateExpenseForm } from 'composables/form/useCreateExpenseForm'
-import type { Expense, ExpenseAction } from 'models/expenses.model'
+import type { ExpenseCreate, ExpenseEdit } from 'models/expenses.model'
+import { Currency } from 'models/expenses.model'
 import { useIconStore } from 'store/icons'
 import { PhCalendar } from 'phosphor-vue'
-import { useErrorNotification } from 'composables/useErrorNotification'
 import type { FormInstance } from 'models/element.model'
 import { useCategoryStore } from 'store/categories'
-defineProps<{
-  action: ExpenseAction
-  currentExpense?: Expense
+
+const props = defineProps<{
+  rules: object
+  model: ExpenseCreate | ExpenseEdit
+  submitMsg: string
 }>()
+const emits = defineEmits(['submit', 'error'])
 
-const ruleFormRef = ref<FormInstance | null>(null)
-
-const router = useRouter()
 const { inputIconSize, iconWeight, iconColorPrimary } = storeToRefs(
   useIconStore()
 )
-const { showCreateExpenseError } = useErrorNotification()
-const {
-  expense: form,
-  disabledDate,
-  currencies,
-  rules,
-  onSubmit,
-} = useCreateExpenseForm()
-
-const submitForm = () =>
-  onSubmit(
-    get(ruleFormRef),
-    () => {
-      ElNotification.closeAll()
-      router.replace('/expenses')
-    },
-    () => showCreateExpenseError(null)
-  )
-
 const categoryStore = useCategoryStore()
 categoryStore.fetchCategories()
+
+const form = reactive(props.model)
+const formRef = ref<FormInstance | null>(null)
+
+const disabledDate = (time: Date) => time.getTime() > Date.now()
+const currencies = computed(() =>
+  Object.entries(Currency).map(([label, value]) => ({ label, value }))
+)
+
+const emitSubmit = () => emits('submit', { formRef, form })
 </script>
 
 <template>
   <el-form
-    ref="ruleFormRef"
+    ref="formRef"
     label-position="top"
     :model="form"
     :rules="rules"
     class="w-full md:w-[500px]"
     size="large"
     hide-required-asterisk
-    @submit.prevent="submitForm"
+    @submit.prevent="emitSubmit"
   >
     <el-form-item label="Title" prop="title">
       <el-input v-model="form.title" type="text">
@@ -117,7 +107,7 @@ categoryStore.fetchCategories()
     <el-form-item>
       <el-button type="primary" native-type="submit">
         <div class="flex items-center gap-2">
-          Create expense
+          {{ submitMsg }}
           <PhPlusCircle :weight="iconWeight" size="20" />
         </div>
       </el-button>

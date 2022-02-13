@@ -1,9 +1,8 @@
 import { useExpenseUpdate } from 'composables/api/expenses'
 import type { ElForm } from 'element-plus'
 import type { ExpenseEdit } from 'models/expenses.model'
-import { Currency } from 'models/expenses.model'
 
-export const useCreateExpenseForm = () => {
+export const useEditExpenseForm = () => {
   const { updateExpense, isSuccess } = useExpenseUpdate()
 
   const rules = reactive({
@@ -57,12 +56,6 @@ export const useCreateExpenseForm = () => {
     ],
   })
 
-  const disabledDate = (time: Date) => time.getTime() > Date.now()
-
-  const currencies = computed(() =>
-    Object.entries(Currency).map(([label, value]) => ({ label, value }))
-  )
-
   const onSubmit = async (
     id: string,
     expense: ExpenseEdit,
@@ -86,8 +79,6 @@ export const useCreateExpenseForm = () => {
   }
 
   return {
-    disabledDate,
-    currencies,
     onSubmit,
     rules,
   }

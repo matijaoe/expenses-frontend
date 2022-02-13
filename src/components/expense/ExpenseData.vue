@@ -34,6 +34,10 @@ const onDelete = async () => {
     router.replace('/expenses')
   }
 }
+
+const onEditReq = () => {
+  router.push(`/expenses/${props.expense._id}/edit`)
+}
 </script>
 
 <template>
@@ -43,7 +47,7 @@ const onDelete = async () => {
         <el-tag size="small">{{ category }}</el-tag>
       </div>
       <div>
-        <el-button size="small" type="primary" plain>
+        <el-button size="small" type="primary" plain @click="onEditReq">
           <div class="flex items-center gap-2">
             Edit
             <PhPencil :weight="iconWeight" />
