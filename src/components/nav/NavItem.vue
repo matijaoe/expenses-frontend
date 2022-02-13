@@ -7,18 +7,22 @@ defineEmits(['click'])
 </script>
 
 <template>
-  <el-link type="primary" @click="$emit('click')">
-    <router-link v-if="to" :to="to" class="flex items-center gap-1">
-      {{ label }}
-      <slot />
+  <div>
+    <router-link v-if="to" :to="to">
+      <el-link>
+        <div class="flex items-center gap-1">
+          <slot />
+          {{ label }}
+        </div>
+      </el-link>
     </router-link>
-    <div v-else>
+    <el-link v-else @click="$emit('click')">
       <div class="flex items-center gap-1">
         {{ label }}
         <slot />
       </div>
-    </div>
-  </el-link>
+    </el-link>
+  </div>
 </template>
 
 <style lang="scss" scoped></style>

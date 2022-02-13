@@ -84,7 +84,6 @@ export const useCreateExpenseForm = () => {
     formEl.validate(async (valid: any) => {
       if (valid) {
         const newExpense = await createExpense(expense)
-        console.log('newExpense :>> ', newExpense)
         if (isSuccess && newExpense) {
           await onSuccess()
           return newExpense
