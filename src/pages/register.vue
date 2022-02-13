@@ -11,10 +11,10 @@ meta:
 
 <template>
   <div>
-    <AuthFormTitle>
+    <PageTitle class="justify-end mb-8">
       Register
       <PhIdentificationBadge :weight="iconWeight" :color="iconColorPrimary" />
-    </AuthFormTitle>
+    </PageTitle>
     <RegisterForm />
   </div>
 </template>

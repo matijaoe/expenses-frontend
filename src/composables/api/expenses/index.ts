@@ -4,31 +4,37 @@ import type {
   ExpenseUpdate,
 } from 'models/expenses.model'
 import * as api from 'services/api/expenses'
+import { useExpensesStore } from 'store/expenses'
 import { useResultState } from '..'
 
+const loading = ref(false)
+
 export const useExpenses = () => {
-  const expenses = ref<Expense[]>()
+  const store = useExpensesStore()
   const { error, isError, isSuccess } = useResultState()
 
   const fetchExpenses = async () => {
     try {
+      set(loading, true)
       const fetchedExpenses = await api.listExpenses()
+      set(loading, false)
       if (fetchedExpenses) {
-        set(expenses, fetchedExpenses)
-        return expenses
+        store.setExpenses(fetchedExpenses)
+        return fetchedExpenses
       }
     } catch (err) {
       set(error, err)
+      set(loading, false)
       return false
     }
   }
 
   return {
-    expenses: readonly(expenses),
     fetchExpenses,
     error,
     isError,
     isSuccess,
+    loading,
   }
 }
 
@@ -59,6 +65,7 @@ export const useExpense = () => {
 }
 
 export const useExpenseCreate = () => {
+  const store = useExpensesStore()
   const expense = ref<Expense>()
   const { error, isError, isSuccess } = useResultState()
 
@@ -67,6 +74,7 @@ export const useExpenseCreate = () => {
       const newExpense = await api.createExpense(expenseData)
       if (newExpense) {
         set(expense, newExpense)
+        store.addExpense(newExpense)
         return expense
       }
     } catch (err) {
@@ -85,6 +93,7 @@ export const useExpenseCreate = () => {
 }
 
 export const useExpenseUpdate = () => {
+  const store = useExpensesStore()
   const expense = ref<Expense>()
   const { error, isError, isSuccess } = useResultState()
 
@@ -93,6 +102,7 @@ export const useExpenseUpdate = () => {
       const updatedExpense = await api.updateExpense(id, expenseData)
       if (updatedExpense) {
         set(expense, updatedExpense)
+        store.updateExpense(updatedExpense)
         return expense
       }
     } catch (err) {
@@ -111,6 +121,7 @@ export const useExpenseUpdate = () => {
 }
 
 export const useExpenseDelete = () => {
+  const store = useExpensesStore()
   const expense = ref<Expense>()
   const { error, isError, isSuccess } = useResultState()
 
@@ -119,6 +130,7 @@ export const useExpenseDelete = () => {
       const deletedExpense = await api.deleteExpense(id)
       if (deletedExpense) {
         set(expense, deletedExpense)
+        store.deleteExpense(deletedExpense)
         return expense
       }
     } catch (err) {

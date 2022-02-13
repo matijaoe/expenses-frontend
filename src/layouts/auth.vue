@@ -2,7 +2,7 @@
 
 <template>
   <div class="h-full p-4 flex flex-col items-center justify-center">
-    <div class="-translate-y-[12vh]">
+    <div class="min-h-screen flex flex-col mt-[15vh]">
       <router-view />
     </div>
   </div>

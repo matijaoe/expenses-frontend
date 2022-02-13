@@ -12,10 +12,10 @@ meta:
 
 <template>
   <div>
-    <AuthFormTitle>
+    <PageTitle class="justify-end mb-8">
       Login
       <PhSignIn :weight="iconWeight" :color="iconColorPrimary" />
-    </AuthFormTitle>
+    </PageTitle>
     <LoginForm />
   </div>
 </template>

@@ -2,20 +2,22 @@
 import { useExpenses } from 'composables/api/expenses'
 import { PhArrowClockwise } from 'phosphor-vue'
 import { useIconStore } from 'store/icons'
-const { fetchExpenses } = useExpenses()
 const { iconColorPrimary, iconWeight } = storeToRefs(useIconStore())
-
-const onRefresh = () => {
-  console.log('onRefresh')
-  fetchExpenses()
-}
+const { fetchExpenses } = useExpenses()
 </script>
 
 <template>
-  Expenses
-  <div @click="onRefresh">
-    <PhArrowClockwise :color="iconColorPrimary" :weight="iconWeight" />
-  </div>
+  <header class="flex items-center justify-between mb-4">
+    <PageTitle>Expenses</PageTitle>
+    <div class="p-4" @click="fetchExpenses">
+      <PhArrowClockwise
+        class="hover:animate-spin cursor-pointer"
+        :color="iconColorPrimary"
+        :weight="iconWeight"
+        :size="30"
+      />
+    </div>
+  </header>
   <ExpenseList />
 </template>
 
