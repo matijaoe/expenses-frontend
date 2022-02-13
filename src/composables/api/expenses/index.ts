@@ -44,13 +44,17 @@ export const useExpense = () => {
 
   const fetchExpense = async (id: string) => {
     try {
+      set(loading, true)
+
       const fetchedExpense = await api.getExpense(id)
+      set(loading, false)
       if (fetchedExpense) {
         set(expense, fetchedExpense)
         return expense
       }
     } catch (err) {
       set(error, err)
+      set(loading, false)
       return false
     }
   }
@@ -61,6 +65,7 @@ export const useExpense = () => {
     error,
     isError,
     isSuccess,
+    loading,
   }
 }
 

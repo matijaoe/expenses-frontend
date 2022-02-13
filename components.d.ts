@@ -4,7 +4,6 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    AuthFormTitle: typeof import('./src/components/auth/PageTitle.vue')['default']
     BaseButton: typeof import('./src/components/UI/BaseButton.vue')['default']
     CurrencyIcon: typeof import('./src/components/expense/CurrencyIcon.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -12,14 +11,11 @@ declare module 'vue' {
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElLink: typeof import('element-plus/es')['ElLink']
-    ElRadioButton: typeof import('element-plus/es')['ElRadioButton']
-    ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
-    ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
-    ElSkeletonItem: typeof import('element-plus/es')['ElSkeletonItem']
     ElTag: typeof import('element-plus/es')['ElTag']
-    ExpenseItem: typeof import('./src/components/expense/ExpenseItem.vue')['default']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    ExpenseData: typeof import('./src/components/expense/ExpenseData.vue')['default']
+    ExpenseItemCard: typeof import('./src/components/expense/ExpenseItemCard.vue')['default']
     ExpenseList: typeof import('./src/components/expense/ExpenseList.vue')['default']
-    Footer: typeof import('./src/components/layout/Footer.vue')['default']
     Icon: typeof import('./src/components/UI/Icon.vue')['default']
     LoginForm: typeof import('./src/components/auth/LoginForm.vue')['default']
     NavBar: typeof import('./src/components/nav/NavBar.vue')['default']

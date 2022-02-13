@@ -1,45 +1,16 @@
-<script setup lang="ts">
-import { useAuth } from 'composables/api/auth'
-import { useUserStore } from 'store/user'
-
-const userStore = useUserStore()
-
-const { logout } = useAuth()
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div
     class="bg-white dark:bg-true-gray-900 h-full p-4 max-w-5xl mx-auto"
     p="y-4 x-6"
-    text="center true-gray-700 dark:true-gray-200"
-    font="sans medium"
+    text="true-gray-800 dark:true-gray-200"
+    font="mono medium"
   >
-    <nav class="flex gap-8 justify-center items-center mb-4">
-      <el-link v-if="!userStore.isAuthenticated" type="primary">
-        <router-link to="/login">
-          Login
-          <Icon class="i-carbon-login" />
-        </router-link>
-      </el-link>
-      <el-link v-if="!userStore.isAuthenticated" type="primary">
-        <router-link to="/register">
-          Register
-          <Icon class="i-carbon-login" />
-        </router-link>
-      </el-link>
-      <el-button v-else type="text" @click="logout">
-        Logout
-        <Icon class="i-carbon-logout" />
-      </el-button>
-      <el-link type="primary">
-        <router-link to="/">
-          Home
-          <Icon class="i-carbon-home" />
-        </router-link>
-      </el-link>
-    </nav>
-    <router-view />
-    <Footer />
+    <NavBar />
+    <main class="mt-8">
+      <router-view />
+    </main>
   </div>
 </template>
 

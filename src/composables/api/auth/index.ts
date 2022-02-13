@@ -2,10 +2,13 @@ import { get, set } from '@vueuse/core'
 import type { UserLogin, UserRegister } from 'models/auth.model'
 import * as auth from 'services/api/auth'
 import LocalStorageService from 'services/local_storage'
+import { useExpensesStore } from 'store/expenses'
 import { useUserStore } from 'store/user'
 
 export const useAuth = () => {
+  const router = useRouter()
   const userStore = useUserStore()
+  const expensesStore = useExpensesStore()
   const { user, token } = storeToRefs(userStore)
 
   const error = ref<string | null>(null)
@@ -45,7 +48,9 @@ export const useAuth = () => {
 
     try {
       const res = await auth.logout()
+      router.replace('/login')
       userStore.clearUserData()
+      expensesStore.$reset()
       return res
     } catch (err) {
       console.log(err)

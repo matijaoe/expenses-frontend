@@ -14,7 +14,7 @@ fetchExpenses()
 
 <template>
   <section v-if="hasExpenses" class="expense-list gap-4 mx-auto">
-    <ExpenseItem
+    <ExpenseItemCard
       v-for="expense in expenses"
       :key="expense._id"
       :expense="expense"

@@ -7,7 +7,7 @@ checkSavedLogin()
 </script>
 
 <template>
-  <main >
+  <div>
     <router-view />
-  </main>
+  </div>
 </template>

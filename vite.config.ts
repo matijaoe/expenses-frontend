@@ -26,7 +26,20 @@ export default defineConfig({
       root: '.',
       extensions: ['.ts', '.tsx', '.js', '.jsx', '.vue'],
     }),
-    Pages(),
+    Pages({
+      extendRoute(route) {
+        if (route.path === '/login' || route.path === '/register') {
+          // Index is unauthenticated.
+          return route
+        }
+
+        // Augment the route with meta that indicates that the route requires authentication.
+        return {
+          ...route,
+          meta: { auth: true },
+        }
+      },
+    }),
     Layouts(),
     AutoImport({
       imports: [
@@ -63,6 +76,11 @@ export default defineConfig({
           },
         }),
       ],
+      theme: {
+        fontFamily: {
+          mono: ['Space Mono', 'monospace'],
+        },
+      },
     }),
     ViteFonts({
       google: {

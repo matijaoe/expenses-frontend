@@ -7,7 +7,6 @@
     "lint": "eslint . --ext=.ts,.vue"
   },
   "dependencies": {
-    "@imengyu/vue3-context-menu": "^1.0.9",
     "@vueuse/core": "^7.6.1",
     "axios": "^0.25.0",
     "dayjs": "^1.10.7",

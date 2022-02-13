@@ -6,7 +6,6 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Space Mono', sans-serif;
 }
 
 html {
@@ -14,3 +13,18 @@ html {
     background: var(--bg-dark);
   }
 }
+
+// .mx-context-menu {
+//   border-radius: 6px;
+//   box-shadow: none;
+//   --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+//     0 10px 10px -5px rgba(0, 0, 0, 0.04);
+//   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+//     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+
+//   .text {
+//     .icon {
+//       display: none;
+//     }
+//   }
+// }
