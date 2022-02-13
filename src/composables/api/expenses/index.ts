@@ -89,7 +89,7 @@ export const useExpenseCreate = () => {
   }
 
   return {
-    expense: readonly(expense),
+    expense,
     createExpense,
     error,
     isError,

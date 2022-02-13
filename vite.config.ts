@@ -33,10 +33,16 @@ export default defineConfig({
           return route
         }
 
+        const meta = { auth: true, admin: false }
+
+        if (route.path.includes('/admin')) {
+          meta.admin = true
+        }
+
         // Augment the route with meta that indicates that the route requires authentication.
         return {
           ...route,
-          meta: { auth: true },
+          meta,
         }
       },
     }),

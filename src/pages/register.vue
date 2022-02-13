@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { PhIdentificationBadge } from 'phosphor-vue'
 import { useIconStore } from 'store/icons'
 const { iconColorPrimary, iconWeight } = storeToRefs(useIconStore())
 </script>

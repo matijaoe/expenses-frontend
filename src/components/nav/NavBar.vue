@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import { useAuth } from 'composables/api/auth'
 import { useUserStore } from 'store/user'
-import {
-  PhHouse,
-  PhIdentificationBadge,
-  PhReceipt,
-  PhSignIn,
-  PhSignOut,
-} from 'phosphor-vue'
 import { useIconStore } from 'store/icons'
 const userStore = useUserStore()
 const { iconWeight } = storeToRefs(useIconStore())
@@ -36,11 +29,11 @@ const iconSize = ref(20)
         </NavItem>
       </template>
 
-      <NavItem v-else label="Logout" @click="logout">
-        <PhSignOut :weight="iconWeight" :size="iconSize" />
-      </NavItem>
       <NavItem v-if="userStore.isAdmin" label="Admin" to="/admin">
         <PhHouse :weight="iconWeight" :size="iconSize" />
+      </NavItem>
+      <NavItem v-if="userStore.isAuthenticated" label="Logout" @click="logout">
+        <PhSignOut :weight="iconWeight" :size="iconSize" />
       </NavItem>
     </div>
   </nav>

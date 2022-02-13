@@ -14,6 +14,10 @@ export const useRegisterForm = () => {
   })
   const repeatedPassword = ref('')
 
+  const roles = computed(() =>
+    Object.entries(UserRole).map(([label, value]) => ({ label, value }))
+  )
+
   const passwordMatch = () =>
     form.password.trim() !== '' &&
     form.password.trim().toString() === get(repeatedPassword).trim().toString()
@@ -97,6 +101,7 @@ export const useRegisterForm = () => {
     repeatedPassword,
     rules,
     onSubmit,
+    roles,
     ...auth,
   }
 }

@@ -2,7 +2,6 @@
 import { useExpenses } from 'composables/api/expenses'
 import { useExpensesStore } from 'store/expenses'
 
-import { PhSignpost, PhWarning } from 'phosphor-vue'
 import { useIconStore } from 'store/icons'
 
 const { fetchExpenses, isSuccess, loading, isError } = useExpenses()

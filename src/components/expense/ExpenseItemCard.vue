@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Expense } from 'models/expenses.model'
 import { useIconStore } from 'store/icons'
-import { PhReceipt, PhTrash } from 'phosphor-vue'
 import { titleCase } from 'title-case'
 import { DateFormat, useDate } from 'composables/helpers/useDate'
 import { usePrice } from 'composables/helpers/useCurrency'
@@ -45,7 +44,7 @@ const formattedAmount = computed(() => formatAmount(props.expense.amount))
             {{ formattedDate }}
           </p>
         </div>
-        <div class="flex justify-between gap-2">
+        <div class="flex justify-between gap-2 mt-auto">
           <div class="flex flex-col gap-2">
             <div>
               <p

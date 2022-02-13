@@ -11,8 +11,16 @@ export interface Expense {
   __v?: number
 }
 
-export type ExpenseCreate = Omit<Expense, '_id' | 'createdAt' | 'updatedAt'>
+export type ExpenseAction = 'add' | 'edit'
 
+export interface ExpenseCreate {
+  title: string
+  description: string
+  amount: number | null
+  currency: Currency
+  date: string
+  owner: string
+}
 export type ExpenseUpdate = Partial<Expense>
 
 export enum Currency {

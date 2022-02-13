@@ -25,7 +25,6 @@ const formattedAmount = computed(() => formatAmount(props.expense.amount))
 
 const onDelete = async () => {
   const success = await handleExpenseDelete(props.expense._id)
-  console.log('success :>> ', success)
   if (success) {
     router.replace('/expenses')
   }

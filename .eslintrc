@@ -19,6 +19,7 @@
     "vue/html-self-closing": "off",
     "curly": "off",
     "operator-linebreak": "off",
-    "import/no-named-as-default": "off"
+    "import/no-named-as-default": "off",
+    "@typescript-eslint/indent": "off"
   }
 }

@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import { useErrorNotification } from 'composables/useErrorNotification'
-import { PhEnvelope, PhEye, PhEyeClosed, PhUserSquare } from 'phosphor-vue'
 import { useIconStore } from 'store/icons'
-import type { ElForm } from 'element-plus'
 import { usePasswordVisibility } from 'composables/form/usePasswordVisibility'
 import { useRegisterForm } from 'composables/form/useRegisterForm'
-import { UserRole } from 'models/user.model'
+import type { FormInstance } from 'models/element.model'
 
-type FormInstance = InstanceType<typeof ElForm>
 const ruleFormRef = ref<FormInstance | null>(null)
 
 const router = useRouter()
@@ -16,11 +13,8 @@ const { visible, toggleVisiblity } = usePasswordVisibility()
 const { visible: repeatedVisible, toggleVisiblity: toggleRepeatedVisibility } =
   usePasswordVisibility()
 
-const roles = computed(() =>
-  Object.entries(UserRole).map(([label, value]) => ({ label, value }))
-)
-
-const { form, repeatedPassword, rules, error, onSubmit } = useRegisterForm()
+const { form, repeatedPassword, rules, error, onSubmit, roles } =
+  useRegisterForm()
 const { showRegisterError } = useErrorNotification()
 
 const submitForm = () =>
@@ -37,6 +31,7 @@ const submitForm = () =>
 <template>
   <el-form
     ref="ruleFormRef"
+    label-position="top"
     :model="form"
     :rules="rules"
     label-width="180px"

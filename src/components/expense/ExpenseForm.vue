@@ -1,0 +1,129 @@
+<script setup lang="ts">
+import { useCreateExpenseForm } from 'composables/form/useExpenseForm'
+import type { Expense, ExpenseAction } from 'models/expenses.model'
+import { useIconStore } from 'store/icons'
+import { PhCalendar } from 'phosphor-vue'
+import { useErrorNotification } from 'composables/useErrorNotification'
+import type { FormInstance } from 'models/element.model'
+defineProps<{
+  action: ExpenseAction
+  currentExpense?: Expense
+}>()
+
+const ruleFormRef = ref<FormInstance | null>(null)
+
+const router = useRouter()
+const { inputIconSize, iconWeight, iconColorPrimary } = storeToRefs(
+  useIconStore()
+)
+const { showCreateExpenseError } = useErrorNotification()
+const {
+  expense: form,
+  disabledDate,
+  currencies,
+  rules,
+  onSubmit,
+} = useCreateExpenseForm()
+
+// const submitForm = async () => {
+//   const newExpense: Expense | null | undefined = await onSubmit()
+//   if (newExpense) {
+//     router.replace('/expenses')
+//   } else {
+//     showCreateExpenseError(null)
+//   }
+// }
+
+const submitForm = () =>
+  onSubmit(
+    get(ruleFormRef),
+    () => {
+      ElNotification.closeAll()
+      router.replace('/expenses')
+    },
+    () => showCreateExpenseError(null)
+  )
+</script>
+
+<template>
+  <el-form
+    ref="ruleFormRef"
+    label-position="top"
+    :model="form"
+    :rules="rules"
+    class="w-full md:w-[500px]"
+    size="large"
+    hide-required-asterisk
+    @submit.prevent="submitForm"
+  >
+    <el-form-item label="Title" prop="title">
+      <el-input v-model="form.title" type="text">
+        <template #prefix>
+          <PhTextAa
+            :size="inputIconSize"
+            :weight="iconWeight"
+            :color="iconColorPrimary"
+          />
+        </template>
+      </el-input>
+    </el-form-item>
+    <el-form-item label="Description" prop="description">
+      <el-input v-model="form.description" type="textarea" rows="4" />
+    </el-form-item>
+    <!-- price -->
+    <div class="flex items-center gap-3">
+      <el-form-item label="Currency" prop="currency">
+        <el-select v-model="form.currency" placeholder="Select" size="large">
+          <el-option
+            v-for="item in currencies"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="Price" prop="price" class="flex-1">
+        <el-input v-model="form.amount" type="number" :step="0.01">
+          <template #prefix>
+            <CurrencyIcon
+              :currency="form.currency"
+              :size="inputIconSize"
+              :weight="iconWeight"
+            />
+          </template>
+        </el-input>
+      </el-form-item>
+    </div>
+    <div class="flex items-center gap-3">
+      <el-form-item label="Date" prop="date">
+        <el-date-picker
+          v-model="form.date"
+          type="date"
+          placeholder="Pick a date"
+          :disabled-date="disabledDate"
+          :prefix-icon="PhCalendar"
+        />
+      </el-form-item>
+      <!-- <el-form-item label="Category" prop="category">
+        <el-select v-model="form.category" placeholder="Select a category" size="large">
+          <el-option
+            v-for="item in currencies"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+      </el-form-item> -->
+    </div>
+    <el-form-item>
+      <el-button type="primary" native-type="submit">
+        <div class="flex items-center gap-2">
+          Create expense
+          <PhPlusCircle :weight="iconWeight" size="20" />
+        </div>
+      </el-button>
+    </el-form-item>
+  </el-form>
+</template>
+
+<style lang="scss" scoped></style>

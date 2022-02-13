@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { useErrorNotification } from 'composables/useErrorNotification'
 import { useLoginForm } from 'composables/form/useLoginForm'
-import { PhEnvelope, PhEye, PhEyeClosed } from 'phosphor-vue'
 import { useIconStore } from 'store/icons'
-import type { ElForm } from 'element-plus'
 import { usePasswordVisibility } from 'composables/form/usePasswordVisibility'
+import type { FormInstance } from 'models/element.model'
 
-type FormInstance = InstanceType<typeof ElForm>
 const ruleFormRef = ref<FormInstance | null>(null)
 
 const router = useRouter()
@@ -30,10 +28,11 @@ const submitForm = () =>
 <template>
   <el-form
     ref="ruleFormRef"
+    label-position="top"
     :model="form"
     :rules="rules"
     label-width="120px"
-    class="max-w-[450px]"
+    class="max-w-[400px]"
     size="large"
     @submit.prevent="submitForm"
   >

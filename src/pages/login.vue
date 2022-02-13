@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { PhSignIn } from 'phosphor-vue'
 import { useIconStore } from 'store/icons'
 
 const { iconColorPrimary, iconWeight } = storeToRefs(useIconStore())
