@@ -1,4 +1,5 @@
 import { useExpenseCreate } from 'composables/api/expenses'
+import { useErrorNotification } from 'composables/useErrorNotification'
 import type { ElForm } from 'element-plus'
 import type { ExpenseCreate } from 'models/expenses.model'
 import { Currency } from 'models/expenses.model'
@@ -7,6 +8,7 @@ import { useUserStore } from 'store/user'
 export const useCreateExpenseForm = () => {
   const { user } = storeToRefs(useUserStore())
   const { createExpense, isSuccess } = useExpenseCreate()
+  const router = useRouter()
 
   const expenseModel: ExpenseCreate = reactive({
     title: '',
@@ -69,23 +71,24 @@ export const useCreateExpenseForm = () => {
     ],
   })
 
+  const { showMutateExpenseError } = useErrorNotification()
+
   const onSubmit = async (
     expense: ExpenseCreate,
     formEl: InstanceType<typeof ElForm> | null,
-    onSuccess: Function,
-    onError: Function
+    routeRedirect: string
   ) => {
-    console.log('expense', expense)
     if (!formEl) return
     formEl.validate(async (valid: any) => {
       if (valid) {
         const newExpense = await createExpense(expense)
         if (isSuccess && newExpense) {
-          await onSuccess()
+          ElNotification.closeAll()
+          router.replace(routeRedirect)
           return newExpense
         }
       }
-      onError()
+      showMutateExpenseError(null)
       return null
     })
   }

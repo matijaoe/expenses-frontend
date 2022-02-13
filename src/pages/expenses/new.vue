@@ -1,29 +1,17 @@
 <script setup lang="ts">
 import { useCreateExpenseForm } from 'composables/form/useCreateExpenseForm'
-import { useErrorNotification } from 'composables/useErrorNotification'
 import type { FormInstance } from 'models/element.model'
 import type { ExpenseCreate } from 'models/expenses.model'
 
 const router = useRouter()
-const { showMutateExpenseError } = useErrorNotification()
 const { expenseModel, rules, onSubmit } = useCreateExpenseForm()
 
-const submitForm = ({
-  formRef,
-  form,
-}: {
+interface SubmitFormArgs {
   formRef: FormInstance | null
   form: ExpenseCreate
-}) =>
-  onSubmit(
-    form,
-    get(formRef),
-    () => {
-      ElNotification.closeAll()
-      router.replace('/expenses')
-    },
-    () => showMutateExpenseError(null)
-  )
+}
+const submitForm = ({ formRef, form }: SubmitFormArgs) =>
+  onSubmit(form, get(formRef), '/expenses')
 </script>
 
 <template>
