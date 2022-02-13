@@ -1,30 +1,26 @@
 <script setup lang="ts">
-import { ExpenseAction } from 'models/expenses.model'
 import { useExpense } from 'composables/api/expenses'
-import { useErrorNotification } from 'composables/useErrorNotification'
-import type { FormInstance } from 'models/element.model'
+import { useEditExpenseForm } from 'composables/form/useEditExpenseForm'
+import type { SubmitFormArgs } from 'models'
 
 const route = useRoute()
-const router _= useRouter()
 const expenseId = computed(() => route.params.expenseId as string)
 
 const { fetchExpense, expense } = useExpense()
-const { showMutateExpenseError } = useErrorNotification()
-watchEffect(() => {
+
+const { expenseModel, rules, onSubmit, fillExpenseModel } = useEditExpenseForm()
+
+watchEffect(async () => {
   if (expenseId.value) {
-    fetchExpense(expenseId.value)
+    await fetchExpense(expenseId.value)
+    if (expense.value) {
+      fillExpenseModel(expense.value)
+    }
   }
 })
 
-const submitForm = (ruleFormRef: FormInstance | null) =>
-  onSubmit(
-    get(ruleFormRef),
-    () => {
-      ElNotification.closeAll()
-      router.replace('/expenses')
-    },
-    () => showMutateExpenseError(null)
-  )
+const submitForm = ({ formRef, form }: SubmitFormArgs) =>
+  onSubmit(expenseId.value, form, get(formRef), `/expenses/${expenseId.value}`)
 </script>
 
 <template>
@@ -32,9 +28,9 @@ const submitForm = (ruleFormRef: FormInstance | null) =>
     <PageTitle>Edit expense</PageTitle>
     <ExpenseForm
       v-if="expense"
-      :action="ExpenseAction.EDIT"
       class="mt-8"
-      :current-expense="expense"
+      :model="expenseModel"
+      :rules="rules"
       submit-msg="Add expense"
       @submit="submitForm"
     />

@@ -56,7 +56,7 @@ export const useExpense = () => {
   }
 
   return {
-    expense: readonly(expense),
+    expense,
     fetchExpense,
     error,
     isError,

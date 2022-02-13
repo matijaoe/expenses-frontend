@@ -1,15 +1,9 @@
 <script setup lang="ts">
 import { useCreateExpenseForm } from 'composables/form/useCreateExpenseForm'
-import type { FormInstance } from 'models/element.model'
-import type { ExpenseCreate } from 'models/expenses.model'
+import type { SubmitFormArgs } from 'models'
 
-const router = useRouter()
 const { expenseModel, rules, onSubmit } = useCreateExpenseForm()
 
-interface SubmitFormArgs {
-  formRef: FormInstance | null
-  form: ExpenseCreate
-}
 const submitForm = ({ formRef, form }: SubmitFormArgs) =>
   onSubmit(form, get(formRef), '/expenses')
 </script>

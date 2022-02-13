@@ -1,9 +1,20 @@
 import { useExpenseUpdate } from 'composables/api/expenses'
+import { useErrorNotification } from 'composables/useErrorNotification'
 import type { ElForm } from 'element-plus'
-import type { ExpenseEdit } from 'models/expenses.model'
+import type { Expense, ExpenseEdit } from 'models/expenses.model'
+import { Currency } from 'models/expenses.model'
 
 export const useEditExpenseForm = () => {
   const { updateExpense, isSuccess } = useExpenseUpdate()
+
+  const expenseModel: ExpenseEdit = reactive({
+    title: '',
+    description: '',
+    amount: null,
+    currency: Currency.USD,
+    date: '',
+    category: '',
+  })
 
   const rules = reactive({
     title: [
@@ -20,8 +31,7 @@ export const useEditExpenseForm = () => {
     ],
     description: [
       {
-        min: 2,
-        max: 24,
+        max: 255,
         message: 'Description too long',
         trigger: 'blur',
       },
@@ -56,30 +66,41 @@ export const useEditExpenseForm = () => {
     ],
   })
 
+  const router = useRouter()
+  const { showMutateExpenseError } = useErrorNotification()
+
+  const fillExpenseModel = (expense: Expense) => {
+    expenseModel.title = expense.title
+    expenseModel.description = expense.description
+    expenseModel.amount = expense.amount
+    expenseModel.currency = expense.currency
+    expenseModel.date = expense.date
+    expenseModel.category = expense.category
+  }
+
   const onSubmit = async (
     id: string,
     expense: ExpenseEdit,
     formEl: InstanceType<typeof ElForm> | null,
-    onSuccess: Function,
-    onError: Function
+    routeRedirect: string
   ) => {
     if (!formEl) return
     formEl.validate(async (valid: any) => {
       if (valid) {
         const editedExpense = await updateExpense(id, expense)
-        console.log('editedExpense :>> ', editedExpense)
         if (isSuccess && editedExpense) {
-          await onSuccess()
-          return editedExpense
+          ElNotification.closeAll()
+          router.replace(routeRedirect)
         }
       }
-      onError()
-      return null
+      showMutateExpenseError(null)
     })
   }
 
   return {
+    expenseModel,
     onSubmit,
     rules,
+    fillExpenseModel,
   }
 }
