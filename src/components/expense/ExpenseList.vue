@@ -6,12 +6,10 @@ import { PhSignpost, PhWarning } from 'phosphor-vue'
 import { useIconStore } from 'store/icons'
 
 const { fetchExpenses, isSuccess, loading, isError } = useExpenses()
-const { expenses } = storeToRefs(useExpensesStore())
+const { expenses, hasExpenses } = storeToRefs(useExpensesStore())
 const { iconWeight } = storeToRefs(useIconStore())
 
 fetchExpenses()
-
-const hasExpenses = computed(() => expenses.value?.length > 0)
 </script>
 
 <template>

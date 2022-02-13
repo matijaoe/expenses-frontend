@@ -10,7 +10,13 @@ export const useExpensesStore = defineStore({
   state: (): State => ({
     expenses: [],
   }),
-  getters: {},
+  getters: {
+    hasExpenses: (state): boolean => state?.expenses.length > 0 ?? false,
+    expenseCount: (state) => state?.expenses.length ?? 0,
+    // TODO: handle multiple currencies
+    expenseTotal: (state) =>
+      state.expenses.reduce((acc, expense) => acc + expense.amount, 0),
+  },
   actions: {
     setExpenses(expenses: Expense[]) {
       this.expenses = expenses
