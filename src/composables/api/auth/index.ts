@@ -74,10 +74,17 @@ export const useAuth = () => {
 export const useStoredLogin = () => {
   const userStore = useUserStore()
 
-  const checkSavedLogin = () => {
+  const checkSavedLogin = async () => {
     const token = LocalStorageService.instance.getAccessToken()
-    const user = LocalStorageService.instance.getUser()
-    if (token && user) userStore.setUserData({ user, token })
+    if (token) {
+      const success = await userStore.getCurrentUser()
+      if (success) {
+        userStore.setToken(token)
+      } else {
+        userStore.clearUserData()
+        LocalStorageService.instance.removeAccessToken()
+      }
+    }
   }
 
   return {

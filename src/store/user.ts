@@ -27,7 +27,6 @@ export const useUserStore = defineStore('user', {
     },
     setUser(user: User) {
       this.user = user
-      LocalStorageService.instance.setUser(user)
     },
     setToken(token: string) {
       this.token = token
@@ -36,13 +35,14 @@ export const useUserStore = defineStore('user', {
     clearUserData() {
       this.$reset()
     },
-
     async getCurrentUser() {
       try {
         const user = await getCurrentUser()
         if (user) this.setUser(user)
+        return true
       } catch (error) {
         this.clearUserData()
+        return false
       }
     },
     async updateCurrentUser(userData: UserUpdate) {

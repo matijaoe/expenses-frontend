@@ -67,11 +67,10 @@ const formattedAmount = computed(() => formatAmount(props.expense.amount))
                 content="Delete expense"
                 placement="bottom"
               >
-                <button>
+                <button @click.stop="handleExpenseDelete(expense._id)">
                   <PhTrash
                     :weight="iconWeight"
                     class="hover:text-red-500 text-lg block"
-                    @click.stop="handleExpenseDelete(expense._id)"
                   />
                 </button>
               </el-tooltip>

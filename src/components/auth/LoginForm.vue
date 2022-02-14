@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { useErrorNotification } from 'composables/useErrorNotification'
+import { useNotification } from 'composables/useNotification'
 import { useLoginForm } from 'composables/form/useLoginForm'
 import { useIconStore } from 'store/icons'
 import { usePasswordVisibility } from 'composables/form/usePasswordVisibility'
 import type { FormInstance } from 'models/element.model'
 
-const ruleFormRef = ref<FormInstance | null>(null)
+const formRef = ref<FormInstance | null>(null)
 
 const router = useRouter()
 const { inputIconSize, iconWeight } = storeToRefs(useIconStore())
 const { visible, toggleVisiblity } = usePasswordVisibility()
 
 const { form, rules, error, onSubmit } = useLoginForm()
-const { showLoginError } = useErrorNotification()
+const { showLoginError } = useNotification()
 
 const submitForm = () =>
   onSubmit(
-    get(ruleFormRef),
+    get(formRef),
     () => {
       ElNotification.closeAll()
       router.replace('/')
@@ -27,7 +27,7 @@ const submitForm = () =>
 
 <template>
   <el-form
-    ref="ruleFormRef"
+    ref="formRef"
     label-position="top"
     :model="form"
     :rules="rules"

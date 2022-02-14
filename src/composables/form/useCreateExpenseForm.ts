@@ -1,5 +1,5 @@
 import { useExpenseCreate } from 'composables/api/expenses'
-import { useErrorNotification } from 'composables/useErrorNotification'
+import { useNotification } from 'composables/useNotification'
 import type { ElForm } from 'element-plus'
 import type { ExpenseCreate } from 'models/expenses.model'
 import { Currency } from 'models/expenses.model'
@@ -71,7 +71,7 @@ export const useCreateExpenseForm = () => {
     ],
   })
 
-  const { showMutateExpenseError } = useErrorNotification()
+  const { showMutateExpenseError } = useNotification()
 
   const onSubmit = async (
     expense: ExpenseCreate,

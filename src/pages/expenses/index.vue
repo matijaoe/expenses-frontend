@@ -13,13 +13,18 @@ const onRefresh = () => {
   fetchExpenses()
   categoryStore.fetchCategories()
 }
+
+categoryStore.fetchCategories()
 </script>
 
 <template>
   <header class="flex items-center justify-between mb-5">
     <PageTitle class="items-cetner">
       Expenses
-      <span class="flex items-center justify-center ml-1">
+      <span
+        v-if="expensesStore.hasExpenses"
+        class="flex items-center justify-center ml-1"
+      >
         <el-tag class="text-size-3xl">{{ expensesStore.expenseCount }}</el-tag>
       </span>
     </PageTitle>

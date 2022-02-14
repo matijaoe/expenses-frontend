@@ -23,6 +23,12 @@ const submitForm = ({ formRef, form }: SubmitFormArgs) =>
   onSubmit(expenseId.value, form, get(formRef), `/expenses/${expenseId.value}`)
 </script>
 
+<route lang="yaml">
+name: edit-expense
+meta:
+  auth: true
+</route>
+
 <template>
   <div>
     <PageTitle>Edit expense</PageTitle>

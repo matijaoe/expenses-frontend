@@ -36,7 +36,7 @@ const onDelete = async () => {
 }
 
 const onEditReq = () => {
-  router.push(`/expenses/${props.expense._id}/edit`)
+  router.push({ name: 'edit-expense', params: { id: props.expense._id } })
 }
 </script>
 

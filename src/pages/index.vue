@@ -7,7 +7,7 @@ const userStore = useUserStore()
 
 <template>
   <div class="flex flex-col gap-4 items-center">
-    <h2 class="mt-4 text-5xl">
+    <h2 v-if="userStore.user" class="mt-4 text-5xl">
       Welcome back
       <span>{{ titleCase(userStore.user?.name as string) }}!</span>
     </h2>

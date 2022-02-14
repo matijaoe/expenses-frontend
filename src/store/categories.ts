@@ -1,6 +1,11 @@
-import type { ExpenseCategory } from 'models/category.model'
+import type {
+  ExpenseCategory,
+  ExpenseCategoryCreate,
+} from 'models/category.model'
 import {
+  createGlobalCategory,
   deleteCategory,
+  deleteGlobalCategory,
   getCategory,
   listCategories,
 } from 'services/api/categories'
@@ -18,9 +23,9 @@ export const useCategoryStore = defineStore('categories', {
       state.categories.find(({ _id }) => _id === id),
   },
   actions: {
-    async fetchCategories() {
+    async fetchCategories(globalOnly = false) {
       try {
-        const categories = await listCategories()
+        const categories = await listCategories(globalOnly)
         if (categories) {
           this.setCategories(categories)
         }
@@ -42,10 +47,12 @@ export const useCategoryStore = defineStore('categories', {
         return error
       }
     },
-    async deleteCategory(id: string) {
+    async deleteCategory(id: string, global = false) {
       try {
-        const deletedCategory = await deleteCategory(id)
-        if (deletedCategory) {
+        const deletedCategory = global
+          ? await deleteCategory(id)
+          : await deleteGlobalCategory(id)
+        if (deletedCategory != null) {
           this.categories = this.categories.filter(
             ({ _id }) => _id !== deletedCategory._id
           )
@@ -54,6 +61,18 @@ export const useCategoryStore = defineStore('categories', {
       } catch (error) {
         console.error(error)
         return error
+      }
+    },
+    async createGlobalCategory(data: ExpenseCategoryCreate) {
+      try {
+        const category = await createGlobalCategory(data)
+        if (category) {
+          this.categories.push(category)
+        }
+        return category
+      } catch (error) {
+        console.error(error)
+        return false
       }
     },
     setCategories(categories: ExpenseCategory[]) {

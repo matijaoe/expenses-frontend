@@ -21,7 +21,6 @@ export const ResponseAuthInterceptor = (response: AxiosResponse) => {
     const { token, user } = data as UserWithToken
     if (token && user) {
       LocalStorageService.instance.setAccessToken(token)
-      LocalStorageService.instance.setUser(user)
     }
   }
 

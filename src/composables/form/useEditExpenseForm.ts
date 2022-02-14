@@ -1,5 +1,5 @@
 import { useExpenseUpdate } from 'composables/api/expenses'
-import { useErrorNotification } from 'composables/useErrorNotification'
+import { useNotification } from 'composables/useNotification'
 import type { ElForm } from 'element-plus'
 import type { Expense, ExpenseEdit } from 'models/expenses.model'
 import { Currency } from 'models/expenses.model'
@@ -67,7 +67,7 @@ export const useEditExpenseForm = () => {
   })
 
   const router = useRouter()
-  const { showMutateExpenseError } = useErrorNotification()
+  const { showMutateExpenseError } = useNotification()
 
   const fillExpenseModel = (expense: Expense) => {
     expenseModel.title = expense.title
@@ -75,7 +75,7 @@ export const useEditExpenseForm = () => {
     expenseModel.amount = expense.amount
     expenseModel.currency = expense.currency
     expenseModel.date = expense.date
-    expenseModel.category = expense.category
+    expenseModel.category = expense.category ?? ''
   }
 
   const onSubmit = async (

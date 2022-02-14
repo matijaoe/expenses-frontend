@@ -1,8 +1,10 @@
 import { useExpenseDelete } from 'composables/api/expenses'
 import { ElMessageBox } from 'element-plus'
+import { useCategoryStore } from 'store/categories'
 
 export const useDeleteHandle = () => {
   const { deleteExpense } = useExpenseDelete()
+  const categoryStore = useCategoryStore()
 
   const handleDelete = async (message: string, onSuccess: () => any) =>
     await ElMessageBox.confirm(message)
@@ -20,8 +22,15 @@ export const useDeleteHandle = () => {
       deleteExpense(id)
     )
 
+  const handleGlobalCategoryDelete = async (id: string) =>
+    await handleDelete(
+      'Are you sure you want to delete this global cetegory?',
+      () => categoryStore.deleteCategory(id)
+    )
+
   return {
     handleDelete,
     handleExpenseDelete,
+    handleGlobalCategoryDelete,
   }
 }
