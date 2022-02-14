@@ -23,7 +23,7 @@ const submitForm = () =>
     },
     () => showLoginError(error.value)
   )
-</script>
+</script>e
 
 <template>
   <el-form

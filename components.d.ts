@@ -32,6 +32,7 @@ declare module 'vue' {
     ExpenseForm: typeof import('./src/components/expense/ExpenseForm.vue')['default']
     ExpenseItemCard: typeof import('./src/components/expense/ExpenseItemCard.vue')['default']
     ExpenseList: typeof import('./src/components/expense/ExpenseList.vue')['default']
+    ExpensesFilters: typeof import('./src/components/expense/ExpensesFilters.vue')['default']
     Icon: typeof import('./src/components/UI/Icon.vue')['default']
     LoginForm: typeof import('./src/components/auth/LoginForm.vue')['default']
     NavBar: typeof import('./src/components/nav/NavBar.vue')['default']

@@ -1,26 +1,33 @@
 <script setup lang="ts">
 import { useExpenses } from 'composables/api/expenses'
+import { useExpenseFilters } from 'composables/api/expenses/useExpenseFilters'
+
 import { useExpensesStore } from 'store/expenses'
 
 import { useIconStore } from 'store/icons'
 
 const { fetchExpenses, loading, isError } = useExpenses()
-const { expenses, hasExpenses } = storeToRefs(useExpensesStore())
+const { hasExpenses } = storeToRefs(useExpensesStore())
 const { iconWeight } = storeToRefs(useIconStore())
+
+const { filteredExpenses, hasFilteredExpenses } = useExpenseFilters()
 
 fetchExpenses()
 </script>
 
 <template>
-  <section v-if="hasExpenses" class="expense-list gap-4 mx-auto">
-    <ExpenseItemCard
-      v-for="expense in expenses"
-      :key="expense._id"
-      :expense="expense"
-      :loading="loading"
-    />
+  <section v-if="hasExpenses">
+    <ExpensesFilters class="mb-4" />
+    <div class="expense-list gap-4 mx-auto">
+      <ExpenseItemCard
+        v-for="expense in filteredExpenses"
+        :key="expense._id"
+        :expense="expense"
+        :loading="loading"
+      />
+    </div>
   </section>
-  <div v-else-if="!hasExpenses && !loading">
+  <div v-if="!hasFilteredExpenses && !loading">
     <div
       class="text-2xl font-light text-blue-400 flex flex-col items-center justify-center gap-2 py-4"
     >
