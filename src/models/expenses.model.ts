@@ -1,3 +1,5 @@
+import type { Currency } from './currency.model'
+
 export interface Expense {
   _id: string
   title: string
@@ -28,10 +30,3 @@ export interface ExpenseCreate {
 }
 
 export type ExpenseEdit = Partial<ExpenseCreate>
-
-export enum Currency {
-  USD = 'USD',
-  EUR = 'EUR',
-  GBP = 'GBP',
-  BTC = 'BTC',
-}

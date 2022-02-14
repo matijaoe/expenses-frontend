@@ -1,8 +1,8 @@
 import { useExpenseCreate } from 'composables/api/expenses'
 import { useNotification } from 'composables/useNotification'
 import type { ElForm } from 'element-plus'
+import { Currency } from 'models/currency.model'
 import type { ExpenseCreate } from 'models/expenses.model'
-import { Currency } from 'models/expenses.model'
 import { useUserStore } from 'store/user'
 
 export const useCreateExpenseForm = () => {

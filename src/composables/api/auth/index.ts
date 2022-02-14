@@ -50,7 +50,7 @@ export const useAuth = () => {
       const res = await auth.logout()
       router.replace('/login')
       userStore.clearUserData()
-      expensesStore.$reset()
+      expensesStore.clearExpenses()
       return res
     } catch (err) {
       console.log(err)

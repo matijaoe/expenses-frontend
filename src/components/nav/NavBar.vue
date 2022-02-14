@@ -2,6 +2,7 @@
 import { useAuth } from 'composables/api/auth'
 import { useUserStore } from 'store/user'
 import { useIconStore } from 'store/icons'
+
 const userStore = useUserStore()
 const { iconWeight } = storeToRefs(useIconStore())
 
@@ -11,7 +12,7 @@ const iconSize = ref(20)
 
 <template>
   <nav class="flex gap-8 justify-between items-center mb-4">
-    <div class="flex items-center gap-6">
+    <div v-if="userStore.isAuthenticated" class="flex items-center gap-6">
       <NavItem label="Home" to="/">
         <PhHouse :weight="iconWeight" :size="iconSize" />
       </NavItem>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import {
-  Currency,
   ExpenseAction,
   ExpenseCreate,
   ExpenseEdit,
@@ -10,6 +9,7 @@ import { useIconStore } from 'store/icons'
 import { PhCalendar } from 'phosphor-vue'
 import type { FormInstance } from 'models/element.model'
 import { useCategoryStore } from 'store/categories'
+import { Currency } from 'models/currency.model'
 
 const props = defineProps<{
   action: ExpenseAction

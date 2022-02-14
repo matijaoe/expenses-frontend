@@ -1,4 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useExpenses } from 'composables/api/expenses'
+import { useExpensesStore } from 'store/expenses'
+
+const { fetchExpenses } = useExpenses()
+const expensesStore = useExpensesStore()
+
+fetchExpenses()
+expensesStore.fetchExchangeRates()
+</script>
 
 <template>
   <div

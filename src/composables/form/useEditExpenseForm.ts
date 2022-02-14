@@ -1,8 +1,8 @@
 import { useExpenseUpdate } from 'composables/api/expenses'
 import { useNotification } from 'composables/useNotification'
 import type { ElForm } from 'element-plus'
+import { Currency } from 'models/currency.model'
 import type { Expense, ExpenseEdit } from 'models/expenses.model'
-import { Currency } from 'models/expenses.model'
 
 export const useEditExpenseForm = () => {
   const { updateExpense, isSuccess } = useExpenseUpdate()

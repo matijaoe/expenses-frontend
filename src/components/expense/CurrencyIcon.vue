@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Currency } from 'models/currency.model'
 import {
   PhCurrencyBtc,
   PhCurrencyDollar,
@@ -7,7 +8,6 @@ import {
   PhCurrencyGbp,
 } from 'phosphor-vue'
 
-import { Currency } from 'models/expenses.model'
 import { useIconStore } from 'store/icons'
 
 const props = defineProps<{

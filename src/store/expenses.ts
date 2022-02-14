@@ -1,21 +1,57 @@
+import { Currency } from 'models/currency.model'
 import type { Expense } from 'models/expenses.model'
 import { defineStore } from 'pinia'
+import { getExchangeRates } from 'services/api/currency'
 
 interface State {
   expenses: Expense[]
+  defaultCurrency: Currency
+  rates: Record<Currency, number>
 }
 
 export const useExpensesStore = defineStore({
   id: 'expenses',
   state: (): State => ({
     expenses: [],
+    defaultCurrency: Currency.USD,
+    rates: {
+      [Currency.USD]: 1,
+      [Currency.EUR]: 1,
+      [Currency.GBP]: 1,
+      [Currency.BTC]: 1,
+    },
   }),
   getters: {
-    hasExpenses: (state): boolean => state?.expenses.length > 0 ?? false,
+    hasExpenses: (state) => state?.expenses.length > 0 ?? false,
     expenseCount: (state) => state?.expenses.length ?? 0,
-    // TODO: handle multiple currencies
-    expenseTotal: (state) =>
-      state.expenses.reduce((acc, expense) => acc + expense.amount, 0),
+    expenseTotal: (state) => {
+      const totalPerCurrency = state.expenses.reduce(
+        (acc, expense) => ({
+          ...acc,
+          [expense.currency]: (acc[expense.currency] ?? 0) + expense.amount,
+        }),
+        {
+          [Currency.USD]: 0,
+          [Currency.EUR]: 0,
+          [Currency.GBP]: 0,
+          [Currency.BTC]: 0,
+        }
+      ) as Record<Currency, number>
+
+      console.log('totalPerCurrency :>> ', totalPerCurrency)
+
+      const total = Object.entries(totalPerCurrency).reduce(
+        (acc, [currency, total]) => {
+          const usdRate = 1 / state.rates[currency as Currency]
+          console.log('rate :>> ', currency, usdRate)
+          acc += usdRate * total
+          return acc
+        },
+        0
+      )
+
+      return Number(total.toFixed(2))
+    },
   },
   actions: {
     setExpenses(expenses: Expense[]) {
@@ -32,6 +68,19 @@ export const useExpensesStore = defineStore({
     },
     deleteExpense(expense: Expense) {
       this.expenses = this.expenses.filter(({ _id }) => _id !== expense._id)
+    },
+    clearExpenses() {
+      this.setExpenses([])
+    },
+    async fetchExchangeRates() {
+      const ratesVsUSD = await getExchangeRates(this.defaultCurrency)
+      console.log('ratesVsUSD :>> ', ratesVsUSD)
+      this.rates.USD = ratesVsUSD.USD
+      // Special case
+      this.rates.BTC = ratesVsUSD.BTC / 1000
+      this.rates.GBP = ratesVsUSD.GBP
+      this.rates.EUR = ratesVsUSD.EUR
+      this.rates[this.defaultCurrency] = 1
     },
   },
 })
