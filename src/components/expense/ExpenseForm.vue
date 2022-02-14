@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import type { ExpenseCreate, ExpenseEdit } from 'models/expenses.model'
-import { Currency } from 'models/expenses.model'
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import {
+  Currency,
+  ExpenseAction,
+  ExpenseCreate,
+  ExpenseEdit,
+} from 'models/expenses.model'
 import { useIconStore } from 'store/icons'
 import { PhCalendar } from 'phosphor-vue'
 import type { FormInstance } from 'models/element.model'
 import { useCategoryStore } from 'store/categories'
 
 const props = defineProps<{
+  action: ExpenseAction
   rules: object
   model: ExpenseCreate | ExpenseEdit
   submitMsg: string
@@ -109,7 +115,16 @@ const emitSubmit = () => emits('submit', { formRef, form })
       <el-button type="primary" native-type="submit">
         <div class="flex items-center gap-2">
           {{ submitMsg }}
-          <PhPlusCircle :weight="iconWeight" :size="20" />
+          <PhPlusCircle
+            v-if="action === ExpenseAction.CREATE"
+            :weight="iconWeight"
+            :size="20"
+          />
+          <PhPencil
+            v-if="action === ExpenseAction.EDIT"
+            :weight="iconWeight"
+            :size="20"
+          />
         </div>
       </el-button>
       <el-button plain native-type="button" @click="router.back()">

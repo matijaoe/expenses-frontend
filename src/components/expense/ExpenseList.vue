@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { useExpenses } from 'composables/api/expenses'
 import { useExpenseFilters } from 'composables/api/expenses/useExpenseFilters'
-
 import { useExpensesStore } from 'store/expenses'
-
 import { useIconStore } from 'store/icons'
 
 const { fetchExpenses, loading, isError } = useExpenses()

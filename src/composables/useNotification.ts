@@ -1,3 +1,5 @@
+import type { UserRole } from 'models/user.model'
+
 interface NotificationOptions {
   title: string
   message: string
@@ -37,10 +39,28 @@ export const useNotification = () => {
       type: 'error',
     })
 
+  const showDeletedUserNotication = () => {
+    showNotification({
+      title: 'User deleted',
+      message: 'User and its expenses have been deleted successfully',
+      type: 'success',
+    })
+  }
+
+  const showUpdateUserPrivilegiesNotification = (newRole: UserRole) => {
+    showNotification({
+      title: 'Updated user privileges',
+      message: `User has been given ${newRole.toUpperCase()} privileges`,
+      type: 'success',
+    })
+  }
+
   return {
     showNotification,
     showLoginError,
     showRegisterError,
     showMutateExpenseError,
+    showDeletedUserNotication,
+    showUpdateUserPrivilegiesNotification,
   }
 }

@@ -30,7 +30,12 @@ categoryStore.fetchCategories()
     </PageTitle>
     <div class="flex items-center">
       <router-link to="/expenses/new">
-        <el-button type="primary">Add expense</el-button>
+        <el-button type="primary">
+          <div class="flex items-center gap-2">
+            Add expense
+            <PhPlusCircle :weight="iconWeight" :size="20" />
+          </div>
+        </el-button>
       </router-link>
       <div class="ml-4" @click="onRefresh">
         <PhArrowClockwise

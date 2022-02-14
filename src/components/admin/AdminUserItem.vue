@@ -2,6 +2,7 @@
 import { useUserUpdate } from 'composables/api/users'
 import { useDate } from 'composables/helpers/useDate'
 import { useDeleteHandle } from 'composables/helpers/useDeleteHandle'
+import { useNotification } from 'composables/useNotification'
 import type { User } from 'models/user.model'
 import { UserRole } from 'models/user.model'
 import { useIconStore } from 'store/icons'
@@ -17,20 +18,34 @@ const { formatDateTime } = useDate()
 const { updateUser } = useUserUpdate()
 const { handleGlobalUserDelete } = useDeleteHandle()
 const { iconWeight } = storeToRefs(useIconStore())
+const { showDeletedUserNotication, showUpdateUserPrivilegiesNotification } =
+  useNotification()
 
 const onDelete = async () => {
-  await handleGlobalUserDelete(props.user._id)
-  emits('delete')
+  try {
+    const success = await handleGlobalUserDelete(props.user._id)
+    if (success) {
+      showDeletedUserNotication()
+      emits('delete')
+    } else {
+      throw new Error('Failed to delete user')
+    }
+  } catch (err: any) {
+    console.log(err.message)
+  }
 }
 
 const changeAdminPrivilegies = async (newRole: UserRole) => {
   try {
     const updatedUser = await updateUser(props.user._id, { role: newRole })
     if (updatedUser) {
+      showUpdateUserPrivilegiesNotification(newRole)
       emits('changeRole', { newRole })
+    } else {
+      throw new Error('Failed to delete user')
     }
-  } catch (err) {
-    console.log('Error while fetching user role')
+  } catch (err: any) {
+    console.log(err.message)
   }
 }
 

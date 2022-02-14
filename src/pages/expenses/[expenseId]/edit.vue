@@ -2,6 +2,7 @@
 import { useExpense } from 'composables/api/expenses'
 import { useEditExpenseForm } from 'composables/form/useEditExpenseForm'
 import type { SubmitFormArgs } from 'models'
+import { ExpenseAction } from 'models/expenses.model'
 
 const route = useRoute()
 const expenseId = computed(() => route.params.expenseId as string)
@@ -35,6 +36,7 @@ meta:
     <ExpenseForm
       v-if="expense"
       class="mt-8"
+      :action="ExpenseAction.EDIT"
       :model="expenseModel"
       :rules="rules"
       submit-msg="Edit expense"
