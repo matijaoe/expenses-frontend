@@ -12,7 +12,6 @@ export const listCategories = (
 export const getCategory = (id: string): Promise<ExpenseCategory> =>
   http.get(`/categories/${id}`)
 
-// TODO
 export const createCategory = (category: any): Promise<ExpenseCategory> =>
   http.post('/categories', category)
 

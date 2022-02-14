@@ -11,7 +11,6 @@ declare module 'vue' {
     AdminUsersList: typeof import('./src/components/admin/AdminUsersList.vue')['default']
     BaseButton: typeof import('./src/components/UI/BaseButton.vue')['default']
     CurrencyIcon: typeof import('./src/components/expense/CurrencyIcon.vue')['default']
-    ElLink: typeof import('element-plus/es')['ElLink']
     ExpenseData: typeof import('./src/components/expense/ExpenseData.vue')['default']
     ExpenseForm: typeof import('./src/components/expense/ExpenseForm.vue')['default']
     ExpenseItemCard: typeof import('./src/components/expense/ExpenseItemCard.vue')['default']
