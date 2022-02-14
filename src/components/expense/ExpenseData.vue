@@ -71,7 +71,7 @@ const onEditReq = () => {
       <div>
         <p class="flex self-end items-center translate-y-1">
           <CurrencyIcon :currency="expense.currency" class="text-6xl" />
-          <span class="text-6xl font-light">
+          <span class="font-sans text-6xl font-light">
             {{ formattedAmount }}
           </span>
         </p>

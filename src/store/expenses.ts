@@ -38,12 +38,9 @@ export const useExpensesStore = defineStore({
         }
       ) as Record<Currency, number>
 
-      console.log('totalPerCurrency :>> ', totalPerCurrency)
-
       const total = Object.entries(totalPerCurrency).reduce(
         (acc, [currency, total]) => {
           const usdRate = 1 / state.rates[currency as Currency]
-          console.log('rate :>> ', currency, usdRate)
           acc += usdRate * total
           return acc
         },
@@ -74,12 +71,10 @@ export const useExpensesStore = defineStore({
     },
     async fetchExchangeRates() {
       const ratesVsUSD = await getExchangeRates(this.defaultCurrency)
-      console.log('ratesVsUSD :>> ', ratesVsUSD)
-      this.rates.USD = ratesVsUSD.USD
-      // Special case
-      this.rates.BTC = ratesVsUSD.BTC / 1000
       this.rates.GBP = ratesVsUSD.GBP
       this.rates.EUR = ratesVsUSD.EUR
+      // Special case
+      this.rates.BTC = ratesVsUSD.BTC / 1000
       this.rates[this.defaultCurrency] = 1
     },
   },

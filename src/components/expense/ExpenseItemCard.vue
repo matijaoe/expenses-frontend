@@ -32,12 +32,8 @@ const formattedAmount = computed(() => formatAmount(props.expense.amount))
 
 <template>
   <transition name="el-fade-in-linear" mode="in-out">
-    <article
+    <BaseCard
       v-if="!loading"
-      class="expense rounded transition duration-100 ease-in-out"
-      bg="white hover:blue-100 hover:opacity-20 "
-      border="true-gray-100 2 hover:blue-200"
-      p="4"
       :data-id="expense._id"
       @click="router.push(`/expenses/${expense._id}`)"
     >
@@ -84,7 +80,7 @@ const formattedAmount = computed(() => formatAmount(props.expense.amount))
           </p>
         </div>
       </div>
-    </article>
+    </BaseCard>
   </transition>
 </template>
 
