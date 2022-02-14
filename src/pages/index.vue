@@ -5,6 +5,8 @@ import { titleCase } from 'title-case'
 
 const userStore = useUserStore()
 const budgetStore = useBudgetStore()
+
+budgetStore.fetchBudget()
 </script>
 
 <template>

@@ -30,7 +30,6 @@ const { showNotification } = useNotification()
 
 const submitForm = async () => {
   const res = await categoryStore.createGlobalCategory(form)
-  console.log(res)
   if (res) {
     showNotification({
       title: 'Category created',

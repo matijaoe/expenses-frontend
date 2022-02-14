@@ -25,6 +25,7 @@ declare global {
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
   const EffectScope: typeof import('vue')['EffectScope']
+  const ElNotification: typeof import('element-plus/es')['ElNotification']
   const extendRef: typeof import('@vueuse/core')['extendRef']
   const get: typeof import('@vueuse/core')['get']
   const getActivePinia: typeof import('pinia')['getActivePinia']

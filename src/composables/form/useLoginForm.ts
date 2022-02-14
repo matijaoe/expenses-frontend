@@ -28,11 +28,6 @@ export const useLoginForm = () => {
         message: 'Please enter your password',
         trigger: 'blur',
       },
-      {
-        min: 5,
-        message: 'Password should be at least 5 characters',
-        trigger: 'blur',
-      },
     ],
   })
 

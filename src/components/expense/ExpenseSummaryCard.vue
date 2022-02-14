@@ -8,7 +8,7 @@ const budgetStore = useBudgetStore()
 const expensesStore = useExpensesStore()
 
 const difference = computed(
-  () => (budgetStore?.budget ?? 0) - expensesStore?.expenseTotal ?? 0
+  () => (expensesStore?.expenseTotal ?? 0) - (budgetStore?.budget ?? 0)
 )
 
 const underBudget = computed(() => difference.value <= 0)

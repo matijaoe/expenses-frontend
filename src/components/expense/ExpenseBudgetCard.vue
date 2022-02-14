@@ -18,12 +18,14 @@ const onConfirm = async () => {
   toggleBudgetEdit()
   if (budgetStore.budget == null) {
     await budgetStore.createBudget(budgetInput.value)
-    budgetInput.value = budgetStore.budget ?? 0
   } else {
     await budgetStore.editBudget(budgetInput.value)
-    budgetInput.value = budgetStore.budget ?? 0
   }
 }
+
+whenever(editBudget, () => {
+  budgetInput.value = budgetStore.budget ?? 0
+})
 
 budgetStore.fetchBudget()
 </script>

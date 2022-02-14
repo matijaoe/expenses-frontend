@@ -57,7 +57,7 @@ export const useRegisterForm = () => {
       {
         required: true,
         min: 5,
-        message: 'Password should be at least 5 characters',
+        message: 'Password too short',
         trigger: 'blur',
       },
     ],
