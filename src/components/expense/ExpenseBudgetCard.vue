@@ -15,7 +15,6 @@ const toggleBudgetEdit = () => {
 }
 
 const onConfirm = async () => {
-  console.log('onConfirm')
   toggleBudgetEdit()
   if (budgetStore.budget == null) {
     await budgetStore.createBudget(budgetInput.value)

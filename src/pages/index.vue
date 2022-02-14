@@ -1,8 +1,10 @@
 <script lang="ts" setup>
+import { useBudgetStore } from 'store/budget'
 import { useUserStore } from 'store/user'
 import { titleCase } from 'title-case'
 
 const userStore = useUserStore()
+const budgetStore = useBudgetStore()
 </script>
 
 <template>
@@ -16,9 +18,7 @@ const userStore = useUserStore()
     <div class="grid grid-cols-2 grid-rows-2 gap-4 w-full">
       <ExpenseAmountCard />
       <ExpenseBudgetCard />
-      <BaseCard class="col-span-2 flex items-center justify-center">
-        <div>You went over budget</div>
-      </BaseCard>
+      <ExpenseSummaryCard v-if="budgetStore.hasBudget" />
     </div>
   </div>
 </template>
