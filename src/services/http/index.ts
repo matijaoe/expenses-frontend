@@ -52,9 +52,7 @@ export class HttpClient extends HttpClientBase {
 
   private constructor() {
     super({
-      // TODO: move to environment variables
-      // baseURL: process.env.BASE_URL,
-      baseURL: 'http://localhost:5000/api',
+      baseURL: import.meta.env.VITE_API_URL as string,
     })
     this.registerRequestInterceptor(RequestAuthInterceptor)
     this.registerResponseInterceptor(ResponseAuthInterceptor)
