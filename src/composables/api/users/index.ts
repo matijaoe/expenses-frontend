@@ -20,7 +20,7 @@ export const useUser = () => {
   }
 
   return {
-    user: readonly(user),
+    user,
     fetchUser,
     error,
     isError,
@@ -72,7 +72,7 @@ export const useUserUpdate = () => {
   }
 
   return {
-    user: readonly(user),
+    user,
     updateUser,
     error,
     isError,
@@ -98,7 +98,7 @@ export const useUserDelete = () => {
   }
 
   return {
-    user: readonly(user),
+    user,
     deleteUser,
     error,
     isError,
