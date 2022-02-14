@@ -1,25 +1,32 @@
 <script setup lang="ts">
 import { usePrice } from 'composables/helpers/useCurrency'
-import { useExpensesStore } from 'store/expenses'
+import { useBudgetStore } from 'store/budget'
 import { useIconStore } from 'store/icons'
 
-const expensesStore = useExpensesStore()
-
 const { iconColorPrimary, iconWeight } = storeToRefs(useIconStore())
-
+const budgetStore = useBudgetStore()
 const { formatAmount } = usePrice()
 
-const budget = ref(Number((30_000).toFixed(2)))
-
 const editBudget = ref(false)
+const budgetInput = ref<number>(budgetStore.budget ?? 0)
 
 const toggleBudgetEdit = () => {
   editBudget.value = !editBudget.value
 }
 
-const onEditBudget = () => {
+const onConfirm = async () => {
+  console.log('onConfirm')
   toggleBudgetEdit()
+  if (budgetStore.budget == null) {
+    await budgetStore.createBudget(budgetInput.value)
+    budgetInput.value = budgetStore.budget ?? 0
+  } else {
+    await budgetStore.editBudget(budgetInput.value)
+    budgetInput.value = budgetStore.budget ?? 0
+  }
 }
+
+budgetStore.fetchBudget()
 </script>
 
 <template>
@@ -30,23 +37,36 @@ const onEditBudget = () => {
   >
     <div class="flex items-center justify-between mb-4 ml-3 mr-3">
       <h4 class="font-sans text-2xl uppercase text-blue-900 text-opacity-50">
-        Total spent
+        Budget
       </h4>
 
       <PhBank :size="32" :color="iconColorPrimary" :weight="iconWeight" />
     </div>
     <div class="flex items-center justify-between">
-      <div class="flex items-center">
+      <div
+        v-if="budgetStore.hasBudget && budgetStore.budget"
+        class="flex items-center"
+      >
         <CurrencyIcon :size="60" />
         <div v-if="editBudget">
-          <el-input-number v-model="budget" size="large"></el-input-number>
+          <el-input-number v-model="budgetInput" size="large" :min="1" />
         </div>
         <span v-else class="font-sans text-6xl font-normal">
-          {{ formatAmount(budget) }}
+          {{ formatAmount(budgetStore.budget) }}
+        </span>
+      </div>
+      <!-- if no budget -->
+      <div v-else class="flex items-center">
+        <div v-if="editBudget" class="flex items-center">
+          <CurrencyIcon :size="60" />
+          <el-input-number v-model="budgetInput" size="large" :min="1" />
+        </div>
+        <span v-else class="font-sans text-4xl font-normal">
+          Budget not set
         </span>
       </div>
       <div class="mr-3">
-        <el-button v-if="editBudget" type="success" @click.stop="onEditBudget">
+        <el-button v-if="editBudget" type="success" @click.stop="onConfirm">
           <div class="flex items-center gap-2" size="large">
             Confirm
             <PhCheckSquare :size="20" :weight="iconWeight" />
