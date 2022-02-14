@@ -1,6 +1,6 @@
 # Expense Tracker App for Advanced JavaScript College Course
 
-### [Live Demo on Vercel](https://expenses-frontend-ns1h2h81w-matijao.vercel.app/)
+### [Live Demo on Vercel](https://expenses-frontend-five.vercel.app/)
 
 
 
