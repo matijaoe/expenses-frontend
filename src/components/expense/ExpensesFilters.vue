@@ -15,7 +15,7 @@ const { searchQuery, categoryFilter } = useExpenseFilters()
     <el-input
       v-model="searchQuery"
       type="text"
-      placeholder="Search title, descriptio, category & price"
+      placeholder="Search by title, description, category & price"
       size="large"
       clearable
     >

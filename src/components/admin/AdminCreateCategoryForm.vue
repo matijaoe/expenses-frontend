@@ -49,7 +49,7 @@ const submitForm = async () => {
 </script>
 
 <template>
-  <div class="border-2 border-true-gray-200 rounded p-3 flex-1">
+  <el-card shadow="never">
     <h2 class="mb-5 font-semibold">Create new global category</h2>
     <el-form
       ref="formRef"
@@ -67,7 +67,7 @@ const submitForm = async () => {
         <el-button type="primary" native-type="submit">Create</el-button>
       </el-form-item>
     </el-form>
-  </div>
+  </el-card>
 </template>
 
 <style lang="scss" scoped></style>

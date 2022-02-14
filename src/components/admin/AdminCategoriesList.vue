@@ -12,11 +12,16 @@ const onRefresh = () => {
 
 <template>
   <div>
-    <div class="flex items-center justify-between gap-4 mb-8">
-      <h4 class="uppercase text-red-500">Only global categories are shown</h4>
-      <el-button size="small" plain @click="onRefresh">Refresh</el-button>
+    <div class="flex items-center justify-between gap-4 mb-4">
+      <el-alert
+        title="Only global categories are shown"
+        type="info"
+        show-icon
+        :closable="false"
+      ></el-alert>
+      <el-button plain @click="onRefresh">Refresh</el-button>
     </div>
-    <ul class="flex flex-col gap-4 h-[70vh] overflow-auto px-4 pb-4">
+    <ul class="flex flex-col gap-4 h-[72vh] overflow-auto pr-4 pb-4">
       <AdminCategoryItem
         v-for="category in categoryStore.categories"
         :key="category._id"

@@ -46,7 +46,7 @@ export const useUsers = () => {
   }
 
   return {
-    users: readonly(users),
+    users,
     fetchUsers,
     error,
     isError,
