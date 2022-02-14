@@ -4,7 +4,7 @@
   <div
     class="max-w-5xl mx-auto"
     p="4 b-10"
-    text="true-gray-800 dark:true-gray-200"
+    text="true-gray-800"
     font="mono medium"
   >
     <NavBar />
