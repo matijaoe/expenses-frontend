@@ -2,6 +2,19 @@
 
 ### [Live Demo on Vercel](https://expenses-frontend-ns1h2h81w-matijao.vercel.app/)
 
+
+
+---
+
+To run it locally:
+- install pnpm
+- pnpm dev (for development)
+- pnpm build > pnpm preview
+
+Add to .env
+VITE_API_URL=https://npjs-expenses-backend-eu.herokuapp.com/api or localhost:5000/api
+VITE_CURRENCY_API_KEY=[your-api-key]
+
 <p align='center'>
   <img src='https://user-images.githubusercontent.com/11247099/111864893-a457fd00-899e-11eb-9f05-f4b88987541d.png' alt='Vitesse - Opinionated Vite Starter Template' width='600'/>
 </p>
