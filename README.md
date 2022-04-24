@@ -11,13 +11,19 @@ Final project for Advanced JavaScript College Course
 ![image](https://user-images.githubusercontent.com/46557266/164997459-3fe121e6-5e5f-4f8d-8c92-ee8ea8d7f7ca.png)
 ---
 
-To run it locally:
-- install pnpm
-- pnpm dev (for development)
-- pnpm build
-- pnpm preview
+```bash
+# install dependencies
+$ pnpm install
 
-Add to .env
+# serve with hot reload
+$ pnpm dev
+
+# build for production and launch server
+$ pnpm build
+$ pnpm preview
+```
+
+.env
 ```
 VITE_API_URL=https://npjs-expenses-backend-eu.herokuapp.com/api or localhost:5000/api
 VITE_CURRENCY_API_KEY=[your-api-key]
