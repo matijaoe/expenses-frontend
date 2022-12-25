@@ -1,6 +1,14 @@
-# Expense Tracker App Frontend
+# Expense Tracker | Frontend
 
 Final project for Advanced JavaScript College Course
+
+<p>
+  <img alt="Vue" src="https://img.shields.io/badge/vue-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D" />
+  <img alt="TypeScript" src="https://img.shields.io/badge/-TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" /> 
+  <img alt="Vite" src="https://img.shields.io/badge/-Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
+</p>
+
+---
 
 - 🌻️ [Live Demo](https://expenses-frontend-five.vercel.app/)
 - 🧱️ [Node Backend Repo](https://github.com/mat2ja/expenses-backend)
@@ -11,6 +19,7 @@ Final project for Advanced JavaScript College Course
 ![image](https://user-images.githubusercontent.com/46557266/164997459-3fe121e6-5e5f-4f8d-8c92-ee8ea8d7f7ca.png)
 ---
 
+## Running locally
 ```bash
 # install dependencies
 $ pnpm install
@@ -23,8 +32,10 @@ $ pnpm build
 $ pnpm preview
 ```
 
-.env
-```
+## Environment variables
+
+```bash
+# .env
 VITE_API_URL=https://npjs-expenses-backend-eu.herokuapp.com/api or localhost:5000/api
 VITE_CURRENCY_API_KEY=[your-api-key]
 ```
